@@ -46,7 +46,6 @@ class Episode
     private $length;
 
 
-
     /**
      * Set season
      *
@@ -54,7 +53,7 @@ class Episode
      *
      * @return Episode
      */
-    public function setSeason($season)
+    public function setSeason(int $season): Episode
     {
         $this->season = $season;
 
@@ -66,7 +65,7 @@ class Episode
      *
      * @return integer
      */
-    public function getSeason()
+    public function getSeason(): int
     {
         return $this->season;
     }
@@ -78,7 +77,7 @@ class Episode
      *
      * @return Episode
      */
-    public function setEpisode($episode)
+    public function setEpisode(int $episode): Episode
     {
         $this->episode = $episode;
 
@@ -90,7 +89,7 @@ class Episode
      *
      * @return integer
      */
-    public function getEpisode()
+    public function getEpisode(): int
     {
         return $this->episode;
     }
@@ -102,7 +101,7 @@ class Episode
      *
      * @return Episode
      */
-    public function setTitle($title)
+    public function setTitle(string $title): Episode
     {
         $this->title = $title;
 
@@ -114,7 +113,7 @@ class Episode
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -126,7 +125,7 @@ class Episode
      *
      * @return Episode
      */
-    public function setTvShow(\AppBundle\Entity\Media\TvShow $tvShow = null)
+    public function setTvShow(\AppBundle\Entity\Media\TvShow $tvShow = null): Episode
     {
         $this->tvShow = $tvShow;
 
@@ -138,7 +137,7 @@ class Episode
      *
      * @return \AppBundle\Entity\Media\TvShow
      */
-    public function getTvShow()
+    public function getTvShow(): TvShow
     {
         return $this->tvShow;
     }
@@ -150,7 +149,7 @@ class Episode
      *
      * @return Episode
      */
-    public function setLength($length)
+    public function setLength(int $length): Episode
     {
         $this->length = $length;
 
@@ -162,7 +161,7 @@ class Episode
      *
      * @return integer
      */
-    public function getLength()
+    public function getLength(): int
     {
         return $this->length;
     }

@@ -64,6 +64,7 @@ class Director extends Person
     {
         return $this->firstname;
     }
+
     /**
      * Constructor
      */

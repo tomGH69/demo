@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  */
 class Movie extends Media
-
 {
     /**
      * @var
@@ -126,6 +125,7 @@ class Movie extends Media
     {
         return $this->length;
     }
+
     /**
      * Constructor
      */
