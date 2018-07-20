@@ -37,6 +37,11 @@ abstract class Media
      */
     protected $year;
 
+    /**
+     * @var
+     * @ORM\Column(type="string")
+     */
+    protected $image;
 
     /**
      * Set title
@@ -108,5 +113,29 @@ abstract class Media
     public function getYear()
     {
         return $this->year;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Media
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

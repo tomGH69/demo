@@ -202,4 +202,28 @@ class Movie extends Media
     {
         return $this->directors;
     }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Movie
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
 }
