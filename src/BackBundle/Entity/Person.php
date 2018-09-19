@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace BackBundle\Entity;
 
-use AppBundle\Traits\DoctrineId;
+use BackBundle\Traits\DoctrineId;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"movie" = "AppBundle\Entity\Person\Actor", "tvshow" = "AppBundle\Entity\Person\Director"})
+ * @ORM\DiscriminatorMap({"actor" = "BackBundle\Entity\Person\Actor", "director" = "BackBundle\Entity\Person\Director"})
  */
 abstract class Person
 {
@@ -78,5 +78,13 @@ abstract class Person
     public function getFirstname()
     {
         return $this->firstname;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getFirstname().' '.$this->getName();
     }
 }

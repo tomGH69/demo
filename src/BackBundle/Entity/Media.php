@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace BackBundle\Entity;
 
-use AppBundle\Traits\DoctrineId;
+use BackBundle\Traits\DoctrineId;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity()
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"movie" = "AppBundle\Entity\Media\Movie", "tvshow" = "AppBundle\Entity\Media\TvShow"})
+ * @ORM\DiscriminatorMap({"movie" = "BackBundle\Entity\Media\Movie", "tvshow" = "BackBundle\Entity\Media\TvShow"})
  */
 abstract class Media
 {

@@ -1,0 +1,47 @@
+{% extends '@Back/back_base.html.twig' %}
+
+{% block body %}
+    <h1>Movies list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Length</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Year</th>
+                <th>Image</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for movie in movies %}
+            <tr>
+                <td><a href="{{ path('media_movie_show', { 'id': movie.id }) }}">{{ movie.length }}</a></td>
+                <td>{{ movie.title }}</td>
+                <td>{{ movie.description }}</td>
+                <td>{{ movie.year }}</td>
+                <td>{{ movie.image }}</td>
+                <td>{{ movie.id }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('media_movie_show', { 'id': movie.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('media_movie_edit', { 'id': movie.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('media_movie_new') }}">Create a new movie</a>
+        </li>
+    </ul>
+{% endblock %}

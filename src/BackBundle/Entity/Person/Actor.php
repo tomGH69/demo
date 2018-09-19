@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Entity\Person;
+namespace BackBundle\Entity\Person;
 
-use AppBundle\Entity\Person;
+use BackBundle\Entity\Person;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -14,12 +14,12 @@ class Actor extends Person
 {
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Media\Movie", mappedBy="actors")
+     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Media\Movie", mappedBy="actors")
      */
     private $movies;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Media\TvShow", mappedBy="actors")
+     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Media\TvShow", mappedBy="actors")
      */
     private $tvShows;
 
@@ -82,11 +82,11 @@ class Actor extends Person
     /**
      * Add movie
      *
-     * @param \AppBundle\Entity\Media\Movie $movie
+     * @param \BackBundle\Entity\Media\Movie $movie
      *
      * @return Actor
      */
-    public function addMovie(\AppBundle\Entity\Media\Movie $movie)
+    public function addMovie(\BackBundle\Entity\Media\Movie $movie)
     {
         $this->movies[] = $movie;
 
@@ -96,9 +96,9 @@ class Actor extends Person
     /**
      * Remove movie
      *
-     * @param \AppBundle\Entity\Media\Movie $movie
+     * @param \BackBundle\Entity\Media\Movie $movie
      */
-    public function removeMovie(\AppBundle\Entity\Media\Movie $movie)
+    public function removeMovie(\BackBundle\Entity\Media\Movie $movie)
     {
         $this->movies->removeElement($movie);
     }
@@ -116,11 +116,11 @@ class Actor extends Person
     /**
      * Add tvShow
      *
-     * @param \AppBundle\Entity\Media\TvShow $tvShow
+     * @param \BackBundle\Entity\Media\TvShow $tvShow
      *
      * @return Actor
      */
-    public function addTvShow(\AppBundle\Entity\Media\TvShow $tvShow)
+    public function addTvShow(\BackBundle\Entity\Media\TvShow $tvShow)
     {
         $this->tvShows[] = $tvShow;
 
@@ -130,9 +130,9 @@ class Actor extends Person
     /**
      * Remove tvShow
      *
-     * @param \AppBundle\Entity\Media\TvShow $tvShow
+     * @param \BackBundle\Entity\Media\TvShow $tvShow
      */
-    public function removeTvShow(\AppBundle\Entity\Media\TvShow $tvShow)
+    public function removeTvShow(\BackBundle\Entity\Media\TvShow $tvShow)
     {
         $this->tvShows->removeElement($tvShow);
     }

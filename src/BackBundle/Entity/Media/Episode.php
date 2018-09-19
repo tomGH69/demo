@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Entity\Media;
+namespace BackBundle\Entity\Media;
 
-use AppBundle\Traits\DoctrineId;
+use BackBundle\Traits\DoctrineId;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,7 +34,7 @@ class Episode
     private $title;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Media\TvShow", inversedBy="episodes")
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\Media\TvShow", inversedBy="episodes")
      * @ORM\JoinColumn(name="tvshow_id", referencedColumnName="id")
      */
     private $tvShow;
@@ -121,11 +121,11 @@ class Episode
     /**
      * Set tvShow
      *
-     * @param \AppBundle\Entity\Media\TvShow $tvShow
+     * @param \BackBundle\Entity\Media\TvShow $tvShow
      *
      * @return Episode
      */
-    public function setTvShow(\AppBundle\Entity\Media\TvShow $tvShow = null): Episode
+    public function setTvShow(\BackBundle\Entity\Media\TvShow $tvShow = null): Episode
     {
         $this->tvShow = $tvShow;
 
@@ -135,7 +135,7 @@ class Episode
     /**
      * Get tvShow
      *
-     * @return \AppBundle\Entity\Media\TvShow
+     * @return \BackBundle\Entity\Media\TvShow
      */
     public function getTvShow(): TvShow
     {

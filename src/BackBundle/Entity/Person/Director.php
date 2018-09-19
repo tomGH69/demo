@@ -1,8 +1,8 @@
 <?php
 
-namespace AppBundle\Entity\Person;
+namespace BackBundle\Entity\Person;
 
-use AppBundle\Entity\Person;
+use BackBundle\Entity\Person;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Director extends Person
 {
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Media\Movie", mappedBy="directors")
+     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Media\Movie", mappedBy="directors")
      */
     private $movies;
 
@@ -76,11 +76,11 @@ class Director extends Person
     /**
      * Add movie
      *
-     * @param \AppBundle\Entity\Media\Movie $movie
+     * @param \BackBundle\Entity\Media\Movie $movie
      *
      * @return Director
      */
-    public function addMovie(\AppBundle\Entity\Media\Movie $movie)
+    public function addMovie(\BackBundle\Entity\Media\Movie $movie)
     {
         $this->movies[] = $movie;
 
@@ -90,9 +90,9 @@ class Director extends Person
     /**
      * Remove movie
      *
-     * @param \AppBundle\Entity\Media\Movie $movie
+     * @param \BackBundle\Entity\Media\Movie $movie
      */
-    public function removeMovie(\AppBundle\Entity\Media\Movie $movie)
+    public function removeMovie(\BackBundle\Entity\Media\Movie $movie)
     {
         $this->movies->removeElement($movie);
     }

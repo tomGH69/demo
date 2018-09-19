@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="{{ path('admin_homepage') }}">Back office</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="{{ path('media_movie_index') }}" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Films</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="{{ path('media_movie_index') }}">Voir tous les films</a>
+                        <a class="dropdown-item" href="{{ path('media_movie_new') }}">Ajouter un film</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Séries TV</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="{{ path('media_tvshow_index') }}">Voir toutes les séries</a>
+                        <a class="dropdown-item" href="{{ path('media_tvshow_new') }}">Ajouter une série TV</a>
+                        <a class="dropdown-item" href="#">Ajouter un épisode</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

@@ -1,41 +1,50 @@
 <?php
 
-namespace AppBundle\Entity\Media;
+namespace BackBundle\Entity\Media;
 
-use AppBundle\Entity\Media;
+use BackBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Movie
+ * TvShow
  *
  * @ORM\Entity()
  */
-class Movie extends Media
+class TvShow extends Media
 {
-    /**
-     * @var
-     * @ORM\Column(type="smallint")
-     */
-    private $length;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person\Actor", inversedBy="movies")
-     * @ORM\JoinTable(name="movies_actors")
+     * @ORM\OneToMany(targetEntity="BackBundle\Entity\Media\Episode", mappedBy="tvShow")
+     */
+    private $episodes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Actor", inversedBy="tvShows")
+     * @ORM\JoinTable(name="tvshows_actors")
      */
     protected $actors;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Person\Director", inversedBy="movies")
-     * @ORM\JoinTable(name="movies_directors")
+     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Director", inversedBy="tvShows")
+     * @ORM\JoinTable(name="tvshows_directors")
      */
     protected $directors;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->episodes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 
     /**
      * Set title
      *
      * @param string $title
      *
-     * @return Movie
+     * @return TvShow
      */
     public function setTitle($title)
     {
@@ -59,7 +68,7 @@ class Movie extends Media
      *
      * @param string $description
      *
-     * @return Movie
+     * @return TvShow
      */
     public function setDescription($description)
     {
@@ -83,7 +92,7 @@ class Movie extends Media
      *
      * @param integer $year
      *
-     * @return Movie
+     * @return TvShow
      */
     public function setYear($year)
     {
@@ -103,46 +112,47 @@ class Movie extends Media
     }
 
     /**
-     * Set length
+     * Add episode
      *
-     * @param integer $length
+     * @param \BackBundle\Entity\Media\Episode $episode
      *
-     * @return Movie
+     * @return TvShow
      */
-    public function setLength($length)
+    public function addEpisode(\BackBundle\Entity\Media\Episode $episode)
     {
-        $this->length = $length;
+        $this->episodes[] = $episode;
 
         return $this;
     }
 
     /**
-     * Get length
+     * Remove episode
      *
-     * @return integer
+     * @param \BackBundle\Entity\Media\Episode $episode
      */
-    public function getLength()
+    public function removeEpisode(\BackBundle\Entity\Media\Episode $episode)
     {
-        return $this->length;
+        $this->episodes->removeElement($episode);
     }
 
     /**
-     * Constructor
+     * Get episodes
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function __construct()
+    public function getEpisodes()
     {
-        $this->actors = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->directors = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->episodes;
     }
 
     /**
      * Add actor
      *
-     * @param \AppBundle\Entity\Person\Actor $actor
+     * @param \BackBundle\Entity\Person\Actor $actor
      *
-     * @return Movie
+     * @return TvShow
      */
-    public function addActor(\AppBundle\Entity\Person\Actor $actor)
+    public function addActor(\BackBundle\Entity\Person\Actor $actor)
     {
         $this->actors[] = $actor;
 
@@ -152,9 +162,9 @@ class Movie extends Media
     /**
      * Remove actor
      *
-     * @param \AppBundle\Entity\Person\Actor $actor
+     * @param \BackBundle\Entity\Person\Actor $actor
      */
-    public function removeActor(\AppBundle\Entity\Person\Actor $actor)
+    public function removeActor(\BackBundle\Entity\Person\Actor $actor)
     {
         $this->actors->removeElement($actor);
     }
@@ -172,11 +182,11 @@ class Movie extends Media
     /**
      * Add director
      *
-     * @param \AppBundle\Entity\Person\Director $director
+     * @param \BackBundle\Entity\Person\Director $director
      *
-     * @return Movie
+     * @return TvShow
      */
-    public function addDirector(\AppBundle\Entity\Person\Director $director)
+    public function addDirector(\BackBundle\Entity\Person\Director $director)
     {
         $this->directors[] = $director;
 
@@ -186,9 +196,9 @@ class Movie extends Media
     /**
      * Remove director
      *
-     * @param \AppBundle\Entity\Person\Director $director
+     * @param \BackBundle\Entity\Person\Director $director
      */
-    public function removeDirector(\AppBundle\Entity\Person\Director $director)
+    public function removeDirector(\BackBundle\Entity\Person\Director $director)
     {
         $this->directors->removeElement($director);
     }
@@ -208,7 +218,7 @@ class Movie extends Media
      *
      * @param string $image
      *
-     * @return Movie
+     * @return TvShow
      */
     public function setImage($image)
     {

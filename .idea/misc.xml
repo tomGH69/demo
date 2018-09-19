@@ -6,8 +6,8 @@
         <counts>
           <entry key="init_from_MainMenu" value="1" />
           <entry key="install_from_ComposerEditorNotificationPanel" value="1" />
-          <entry key="self-update_from_MainMenu" value="2" />
-          <entry key="updateAll_from_MainMenu" value="4" />
+          <entry key="self-update_from_MainMenu" value="3" />
+          <entry key="updateAll_from_MainMenu" value="5" />
         </counts>
       </usages-collector>
     </session>

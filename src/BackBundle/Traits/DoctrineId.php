@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Traits;
+namespace BackBundle\Traits;
 
 trait DoctrineId
 {
