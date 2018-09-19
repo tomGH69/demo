@@ -57,6 +57,14 @@ class TvShowController extends Controller
         ));
     }
 
+    public function newEpisodeAction(Request $request, TvShow $tvShow)
+    {
+
+
+
+    }
+
+
     /**
      * Finds and displays a tvShow entity.
      *
