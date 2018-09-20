@@ -2,55 +2,58 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-xl-12">
+        <div class="col-12">
             <h1 class="h1">Films</h1>
-
-            <table class="table">
-                <thead class="table-dark">
-                <tr>
-                    <th>Titre</th>
-                    <th>Acteurs</th>
-                    <th>Réalisateur(s)</th>
-                    <th>Description</th>
-                    <th>Durée</th>
-                    <th>Année</th>
-                    <th>Affiche</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for movie in movies %}
+            <a href="{{ path('media_movie_new') }}" class="btn btn-primary">AJOUTER UN
+                FILM</a>
+            {% if movies is not empty %}
+                <table class="table">
+                    <thead class="table-dark">
                     <tr>
-                        <td>{{ movie.title }}</td>
-                        <td>{% for actor in movie.actors %}{{ actor }}{% if not loop.last %}<br>{% endif %}{% endfor %}</td>
-                        <td>{% for director in movie.directors %}{{ director }}{% endfor %}</td>
-                        <td>{{ movie.description }}</td>
-                        <td>{{ movie.length }}mn</td>
-                        <td>{{ movie.year }}</td>
-                        <td>{{ movie.image }}</td>
-                        <td>
-                            <ul>
-                                <li>
-                                    <a href="{{ path('media_movie_show', { 'id': movie.id }) }}">Voir</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('media_movie_edit', { 'id': movie.id }) }}">Modifier</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('media_movie_delete', { 'id': movie.id }) }}">Supprimer</a>
-                                </li>
-                            </ul>
-                        </td>
+                        <th>Titre</th>
+                        <th>Acteurs</th>
+                        <th>Réalisateur(s)</th>
+                        <th>Description</th>
+                        <th>Durée</th>
+                        <th>Année</th>
+                        <th>Affiche</th>
+                        <th>Actions</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-
-            <ul>
-                <li>
-                    <a href="{{ path('media_movie_new') }}">Create a new movie</a>
-                </li>
-            </ul>
+                    </thead>
+                    <tbody>
+                    {% for movie in movies %}
+                        <tr>
+                            <td>{{ movie.title }}</td>
+                            <td>{% for actor in movie.actors %}{{ actor }}{% if not loop.last %}
+                                    <br>{% endif %}{% endfor %}
+                            </td>
+                            <td>{% for director in movie.directors %}{{ director }}{% endfor %}</td>
+                            <td>{{ movie.description }}</td>
+                            <td>{{ movie.length }}mn</td>
+                            <td>{{ movie.year }}</td>
+                            <td>{{ movie.image }}</td>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('media_movie_show', { 'id': movie.id }) }}">Voir</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('media_movie_edit', { 'id': movie.id }) }}">Modifier</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('media_movie_delete', { 'id': movie.id }) }}">Supprimer</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="row mt-1">
+                    <div class="col-12 alert alert-danger">Aucun film actuellement</div>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

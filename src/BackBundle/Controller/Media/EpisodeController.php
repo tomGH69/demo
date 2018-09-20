@@ -20,7 +20,7 @@ class EpisodeController extends Controller
     /**
      * Creates a new episode entity.
      *
-     * @Route("/new/{id}", name="media_tvshow_episode_new")
+     * @Route("{id}/new", name="media_tvshow_episode_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request, TvShow $tvShow)
@@ -49,7 +49,7 @@ class EpisodeController extends Controller
     /**
      * Show all episodes of a tv show.
      *
-     * @Route("/show-all/{id}", name="media_tvshow_episode_show_all")
+     * @Route("{id}/show-all", name="media_tvshow_episode_show_all")
      * @Method({"GET", "POST"})
      */
     public function showAllAction(Request $request, TvShow $tvShow)
@@ -63,18 +63,16 @@ class EpisodeController extends Controller
     /**
      * Remove an episode
      *
-     * @Route("/remove/{id}", name="media_tvshow_episode_show_all")
+     * @Route("{id}/remove", name="media_tvshow_episode_show_all")
      * @Method({"GET", "POST"})
      */
     public function deleteAction(Request $request, Episode $episode)
     {
-        if ($episode !== null) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($episode);
-            $em->flush();
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($episode);
+        $em->flush();
 
-            return $this->redirectToRoute('media_tvshow_episode_show_all', array('id' => $episode->getTvShow()->getId()));
-        }
+        return $this->redirectToRoute('media_tvshow_episode_show_all', array('id' => $episode->getTvShow()->getId()));
 
     }
 
