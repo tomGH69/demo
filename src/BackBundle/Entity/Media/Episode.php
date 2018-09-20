@@ -65,7 +65,7 @@ class Episode
      *
      * @return integer
      */
-    public function getSeason(): int
+    public function getSeason(): ?int
     {
         return $this->season;
     }
@@ -89,7 +89,7 @@ class Episode
      *
      * @return integer
      */
-    public function getEpisode(): int
+    public function getEpisode(): ?int
     {
         return $this->episode;
     }
@@ -113,7 +113,7 @@ class Episode
      *
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -161,7 +161,7 @@ class Episode
      *
      * @return integer
      */
-    public function getLength(): int
+    public function getLength(): ?int
     {
         return $this->length;
     }

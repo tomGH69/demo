@@ -2,10 +2,12 @@
 
 namespace BackBundle\Controller\Media;
 
+use BackBundle\Entity\Media\Episode;
 use BackBundle\Entity\Media\TvShow;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Tvshow controller.
@@ -57,10 +59,46 @@ class TvShowController extends Controller
         ));
     }
 
+    /**
+     * Creates a new episode entity.
+     *
+     * @Route("/new-episode/{id}", name="media_tvshow_new_episode")
+     * @Method({"GET", "POST"})
+     */
     public function newEpisodeAction(Request $request, TvShow $tvShow)
     {
+        $episode = new Episode();
 
+        $form = $this->createForm('BackBundle\Form\Media\EpisodeType', $episode);
 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $episode->setTvShow($tvShow);
+            $em->persist($episode);
+            $em->flush();
+
+            return $this->redirectToRoute('media_tvshow_episodes', array('id' => $tvShow->getId()));
+        }
+
+        return $this->render('@Back/media/tvshow/new_episode.html.twig', array(
+            'episode' => $episode,
+            'form' => $form->createView()));
+
+    }
+
+    /**
+     * Show all episodes of a tv show.
+     *
+     * @Route("/show-episodes/{id}", name="media_tvshow_show_episodes")
+     * @Method({"GET", "POST"})
+     */
+    public function showEpisodesAction(Request $request, TvShow $tvShow)
+    {
+        $episodes = $this->getDoctrine()->getRepository('BackBundle:Media\Episode')->findBy(array('tvShow' => $tvShow));
+
+        return $this->render('@Back/media/tvshow/show_episodes.html.twig', array('episodes' => $episodes));
 
     }
 
@@ -138,7 +176,6 @@ class TvShowController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('media_tvshow_delete', array('id' => $tvShow->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }
