@@ -1,16 +1,21 @@
 {% extends '@Back/back_base.html.twig' %}
 
 {% block body %}
-    <h1>Movie creation</h1>
-
+    <h1 class="h1">Add movie</h1>
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+    {% for child in form.children %}
+        {% if child.vars.name != "_token" %}
+            <div class="form-group">
+                {{ form_label(child) }}
+                {{ form_widget(child) }}
+            </div>
+        {% endif %}
+    {% endfor %}
+    {{ form_widget(form._token) }}
+    <div class="form-row text-center">
+        <div class="col-12">
+            <input type="submit" value="Create" class="btn btn-primary btn-lg"/>
+        </div>
+    </div>
     {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('media_movie_index') }}">Back to the list</a>
-        </li>
-    </ul>
 {% endblock %}

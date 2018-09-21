@@ -3,6 +3,7 @@
 namespace BackBundle\Entity\Media;
 
 use BackBundle\Traits\DoctrineId;
+use BackBundle\Traits\Timestampable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -14,6 +15,7 @@ class Episode
 {
 
     use DoctrineId;
+    use Timestampable;
 
     /**
      * @var
@@ -53,7 +55,7 @@ class Episode
      *
      * @return Episode
      */
-    public function setSeason(int $season): Episode
+    public function setSeason(?int $season): Episode
     {
         $this->season = $season;
 
@@ -77,7 +79,7 @@ class Episode
      *
      * @return Episode
      */
-    public function setEpisode(int $episode): Episode
+    public function setEpisode(?int $episode): Episode
     {
         $this->episode = $episode;
 
@@ -101,7 +103,7 @@ class Episode
      *
      * @return Episode
      */
-    public function setTitle(string $title): Episode
+    public function setTitle(?string $title): Episode
     {
         $this->title = $title;
 
@@ -149,7 +151,7 @@ class Episode
      *
      * @return Episode
      */
-    public function setLength(int $length): Episode
+    public function setLength(?int $length): Episode
     {
         $this->length = $length;
 

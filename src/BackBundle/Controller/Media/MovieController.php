@@ -45,6 +45,7 @@ class MovieController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
             $em->persist($movie);
             $em->flush();
 

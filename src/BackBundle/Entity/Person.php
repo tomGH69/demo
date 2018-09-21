@@ -3,6 +3,7 @@
 namespace BackBundle\Entity;
 
 use BackBundle\Traits\DoctrineId;
+use BackBundle\Traits\Timestampable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,6 +19,7 @@ abstract class Person
 {
 
     use DoctrineId;
+    use Timestampable;
 
     /**
      * @var

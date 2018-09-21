@@ -3,7 +3,7 @@
 namespace BackBundle\Entity\Media;
 
 use BackBundle\Entity\Media;
-use BackBundle\Traits\DoctrineId;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,12 +34,10 @@ class Movie extends Media
 
     /**
      * Set title
-     *
-     * @param string $title
-     *
+     * @param null|string $title
      * @return Movie
      */
-    public function setTitle($title)
+    public function setTitle(?string $title): Media
     {
         $this->title = $title;
 
@@ -51,7 +49,7 @@ class Movie extends Media
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -61,9 +59,9 @@ class Movie extends Media
      *
      * @param string $description
      *
-     * @return Movie
+     * @return Media
      */
-    public function setDescription($description)
+    public function setDescription(?string $description): Media
     {
         $this->description = $description;
 
@@ -75,7 +73,7 @@ class Movie extends Media
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -85,9 +83,9 @@ class Movie extends Media
      *
      * @param integer $year
      *
-     * @return Movie
+     * @return Media
      */
-    public function setYear($year)
+    public function setYear(?int $year): Media
     {
         $this->year = $year;
 
@@ -99,7 +97,7 @@ class Movie extends Media
      *
      * @return integer
      */
-    public function getYear()
+    public function getYear(): ?int
     {
         return $this->year;
     }
@@ -111,7 +109,7 @@ class Movie extends Media
      *
      * @return Movie
      */
-    public function setLength($length)
+    public function setLength(?int $length): Movie
     {
         $this->length = $length;
 
@@ -123,7 +121,7 @@ class Movie extends Media
      *
      * @return integer
      */
-    public function getLength()
+    public function getLength(): ?int
     {
         return $this->length;
     }
@@ -144,7 +142,7 @@ class Movie extends Media
      *
      * @return Movie
      */
-    public function addActor(\BackBundle\Entity\Person\Actor $actor)
+    public function addActor(\BackBundle\Entity\Person\Actor $actor): Movie
     {
         $this->actors[] = $actor;
 
@@ -166,7 +164,7 @@ class Movie extends Media
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getActors()
+    public function getActors(): Collection
     {
         return $this->actors;
     }
@@ -178,7 +176,7 @@ class Movie extends Media
      *
      * @return Movie
      */
-    public function addDirector(\BackBundle\Entity\Person\Director $director)
+    public function addDirector(\BackBundle\Entity\Person\Director $director): Movie
     {
         $this->directors[] = $director;
 
@@ -200,7 +198,7 @@ class Movie extends Media
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getDirectors()
+    public function getDirectors(): Collection
     {
         return $this->directors;
     }
@@ -212,7 +210,7 @@ class Movie extends Media
      *
      * @return Movie
      */
-    public function setImage($image)
+    public function setImage(?string $image): Media
     {
         $this->image = $image;
 
@@ -224,7 +222,7 @@ class Movie extends Media
      *
      * @return string
      */
-    public function getImage()
+    public function getImage(): ?string
     {
         return $this->image;
     }

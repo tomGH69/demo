@@ -3,6 +3,7 @@
 namespace BackBundle\Entity;
 
 use BackBundle\Traits\DoctrineId;
+use BackBundle\Traits\Timestampable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,6 +19,7 @@ abstract class Media
 {
 
     use DoctrineId;
+    use Timestampable;
 
     /**
      * @var
@@ -50,7 +52,7 @@ abstract class Media
      *
      * @return Media
      */
-    public function setTitle($title)
+    public function setTitle(?string $title): Media
     {
         $this->title = $title;
 
@@ -62,7 +64,7 @@ abstract class Media
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -74,7 +76,7 @@ abstract class Media
      *
      * @return Media
      */
-    public function setDescription($description)
+    public function setDescription(?string $description): Media
     {
         $this->description = $description;
 
@@ -86,7 +88,7 @@ abstract class Media
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -98,7 +100,7 @@ abstract class Media
      *
      * @return Media
      */
-    public function setYear($year)
+    public function setYear(?int $year): Media
     {
         $this->year = $year;
 
@@ -110,7 +112,7 @@ abstract class Media
      *
      * @return integer
      */
-    public function getYear()
+    public function getYear(): ?int
     {
         return $this->year;
     }
@@ -122,7 +124,7 @@ abstract class Media
      *
      * @return Media
      */
-    public function setImage($image)
+    public function setImage(?string $image): Media
     {
         $this->image = $image;
 
@@ -134,7 +136,7 @@ abstract class Media
      *
      * @return string
      */
-    public function getImage()
+    public function getImage(): ?string
     {
         return $this->image;
     }

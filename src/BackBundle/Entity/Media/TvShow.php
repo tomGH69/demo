@@ -3,6 +3,7 @@
 namespace BackBundle\Entity\Media;
 
 use BackBundle\Entity\Media;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,7 +47,7 @@ class TvShow extends Media
      *
      * @return TvShow
      */
-    public function setTitle($title)
+    public function setTitle(?string $title): Media
     {
         $this->title = $title;
 
@@ -58,7 +59,7 @@ class TvShow extends Media
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -68,9 +69,9 @@ class TvShow extends Media
      *
      * @param string $description
      *
-     * @return TvShow
+     * @return Media
      */
-    public function setDescription($description)
+    public function setDescription(?string $description): Media
     {
         $this->description = $description;
 
@@ -82,7 +83,7 @@ class TvShow extends Media
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -94,7 +95,7 @@ class TvShow extends Media
      *
      * @return TvShow
      */
-    public function setYear($year)
+    public function setYear(?int $year): Media
     {
         $this->year = $year;
 
@@ -106,7 +107,7 @@ class TvShow extends Media
      *
      * @return integer
      */
-    public function getYear()
+    public function getYear(): ?int
     {
         return $this->year;
     }
@@ -118,7 +119,7 @@ class TvShow extends Media
      *
      * @return TvShow
      */
-    public function addEpisode(\BackBundle\Entity\Media\Episode $episode)
+    public function addEpisode(\BackBundle\Entity\Media\Episode $episode): TvShow
     {
         $this->episodes[] = $episode;
 
@@ -130,7 +131,7 @@ class TvShow extends Media
      *
      * @param \BackBundle\Entity\Media\Episode $episode
      */
-    public function removeEpisode(\BackBundle\Entity\Media\Episode $episode)
+    public function removeEpisode(\BackBundle\Entity\Media\Episode $episode): void
     {
         $this->episodes->removeElement($episode);
     }
@@ -140,7 +141,7 @@ class TvShow extends Media
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getEpisodes()
+    public function getEpisodes(): Collection
     {
         return $this->episodes;
     }
@@ -152,7 +153,7 @@ class TvShow extends Media
      *
      * @return TvShow
      */
-    public function addActor(\BackBundle\Entity\Person\Actor $actor)
+    public function addActor(\BackBundle\Entity\Person\Actor $actor): TvShow
     {
         $this->actors[] = $actor;
 
@@ -164,7 +165,7 @@ class TvShow extends Media
      *
      * @param \BackBundle\Entity\Person\Actor $actor
      */
-    public function removeActor(\BackBundle\Entity\Person\Actor $actor)
+    public function removeActor(\BackBundle\Entity\Person\Actor $actor): void
     {
         $this->actors->removeElement($actor);
     }
@@ -174,7 +175,7 @@ class TvShow extends Media
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getActors()
+    public function getActors(): Collection
     {
         return $this->actors;
     }
@@ -186,7 +187,7 @@ class TvShow extends Media
      *
      * @return TvShow
      */
-    public function addDirector(\BackBundle\Entity\Person\Director $director)
+    public function addDirector(\BackBundle\Entity\Person\Director $director): TvShow
     {
         $this->directors[] = $director;
 
@@ -198,7 +199,7 @@ class TvShow extends Media
      *
      * @param \BackBundle\Entity\Person\Director $director
      */
-    public function removeDirector(\BackBundle\Entity\Person\Director $director)
+    public function removeDirector(\BackBundle\Entity\Person\Director $director): void
     {
         $this->directors->removeElement($director);
     }
@@ -208,7 +209,7 @@ class TvShow extends Media
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getDirectors()
+    public function getDirectors(): Collection
     {
         return $this->directors;
     }
@@ -218,9 +219,9 @@ class TvShow extends Media
      *
      * @param string $image
      *
-     * @return TvShow
+     * @return Media
      */
-    public function setImage($image)
+    public function setImage(?string $image): Media
     {
         $this->image = $image;
 
@@ -232,7 +233,7 @@ class TvShow extends Media
      *
      * @return string
      */
-    public function getImage()
+    public function getImage(): ?string
     {
         return $this->image;
     }

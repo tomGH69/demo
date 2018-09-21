@@ -4,19 +4,18 @@
     <div class="row">
         <div class="col-12">
             <h1 class="h1">Films</h1>
-            <a href="{{ path('media_movie_new') }}" class="btn btn-primary">AJOUTER UN
-                FILM</a>
+            <a href="{{ path('media_movie_new') }}" class="btn btn-primary">ADD A MOVIE</a>
             {% if movies is not empty %}
                 <table class="table">
                     <thead class="table-dark">
                     <tr>
-                        <th>Titre</th>
-                        <th>Acteurs</th>
-                        <th>Réalisateur(s)</th>
+                        <th>Title</th>
+                        <th>Actors</th>
+                        <th>Director(s)</th>
                         <th>Description</th>
-                        <th>Durée</th>
-                        <th>Année</th>
-                        <th>Affiche</th>
+                        <th>Length</th>
+                        <th>Year</th>
+                        <th>Thumbnail</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -35,13 +34,13 @@
                             <td>
                                 <ul>
                                     <li>
-                                        <a href="{{ path('media_movie_show', { 'id': movie.id }) }}">Voir</a>
+                                        <a href="{{ path('media_movie_show', { 'id': movie.id }) }}">Show</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('media_movie_edit', { 'id': movie.id }) }}">Modifier</a>
+                                        <a href="{{ path('media_movie_edit', { 'id': movie.id }) }}">Edit</a>
                                     </li>
                                     <li>
-                                        <a href="{{ path('media_movie_delete', { 'id': movie.id }) }}">Supprimer</a>
+                                        <a href="{{ path('media_movie_delete', { 'id': movie.id }) }}">Delete</a>
                                     </li>
                                 </ul>
                             </td>
@@ -51,7 +50,7 @@
                 </table>
             {% else %}
                 <div class="row mt-1">
-                    <div class="col-12 alert alert-danger">Aucun film actuellement</div>
+                    <div class="col-12 alert alert-danger">No movie found</div>
                 </div>
             {% endif %}
         </div>

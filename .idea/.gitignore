@@ -2,3 +2,6 @@
 /vcs.xml
 /workspace.xml
 /symfony2.xml
+/php.xml
+*.xml
+/cinetom.iml
