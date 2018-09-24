@@ -204,13 +204,13 @@ class Movie extends Media
     }
 
     /**
-     * Set image
+     * Set image.
      *
-     * @param string $image
+     * @param \BackBundle\Entity\Image|null $image
      *
      * @return Movie
      */
-    public function setImage(?string $image): Media
+    public function setImage(\BackBundle\Entity\Image $image = null)
     {
         $this->image = $image;
 
@@ -218,11 +218,11 @@ class Movie extends Media
     }
 
     /**
-     * Get image
+     * Get image.
      *
-     * @return string
+     * @return \BackBundle\Entity\Image|null
      */
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }

@@ -40,10 +40,12 @@ abstract class Media
     protected $year;
 
     /**
-     * @var
-     * @ORM\Column(type="string")
+     * @var Image
+     * @ORM\OneToOne(targetEntity="BackBundle\Entity\Image", cascade={"persist"})
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
      */
     protected $image;
+
 
     /**
      * Set title
@@ -117,14 +119,43 @@ abstract class Media
         return $this->year;
     }
 
+
     /**
-     * Set image
+     * Set created.
      *
-     * @param string $image
+     * @param \DateTime $created
      *
      * @return Media
      */
-    public function setImage(?string $image): Media
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Set updated.
+     *
+     * @param \DateTime $updated
+     *
+     * @return Media
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Set image.
+     *
+     * @param \BackBundle\Entity\Image|null $image
+     *
+     * @return Media
+     */
+    public function setImage(\BackBundle\Entity\Image $image = null)
     {
         $this->image = $image;
 
@@ -132,11 +163,11 @@ abstract class Media
     }
 
     /**
-     * Get image
+     * Get image.
      *
-     * @return string
+     * @return \BackBundle\Entity\Image|null
      */
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }

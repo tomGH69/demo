@@ -1,23 +1,20 @@
 <?php
 
-namespace BackBundle\Form\Media;
+namespace BackBundle\Form;
 
-use BackBundle\Form\ImageType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class MovieType extends AbstractType
+class ImageType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('length')->add('title')->add('description')->add('year')
-            ->add('image', ImageType::class)
-            ->add('actors')->add('directors');
+        $builder->add('imageFile', VichImageType::class);
     }
 
     /**
@@ -26,7 +23,7 @@ class MovieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackBundle\Entity\Media\Movie'
+            'data_class' => 'BackBundle\Entity\Image'
         ));
     }
 
@@ -35,7 +32,7 @@ class MovieType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'backbundle_media_movie';
+        return 'backbundle_image';
     }
 
 

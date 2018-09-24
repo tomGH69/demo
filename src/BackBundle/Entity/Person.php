@@ -89,4 +89,32 @@ abstract class Person
     {
         return $this->getFirstname().' '.$this->getName();
     }
+
+    /**
+     * Set created.
+     *
+     * @param \DateTime $created
+     *
+     * @return Person
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Set updated.
+     *
+     * @param \DateTime $updated
+     *
+     * @return Person
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
 }

@@ -167,4 +167,32 @@ class Episode
     {
         return $this->length;
     }
+
+    /**
+     * Set created.
+     *
+     * @param \DateTime $created
+     *
+     * @return Episode
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Set updated.
+     *
+     * @param \DateTime $updated
+     *
+     * @return Episode
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
 }
