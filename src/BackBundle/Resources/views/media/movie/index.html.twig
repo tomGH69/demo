@@ -30,7 +30,7 @@
                             <td>{{ movie.description }}</td>
                             <td>{{ movie.length }}mn</td>
                             <td>{{ movie.year }}</td>
-                            <td>{{ movie.image }}</td>
+                            <td><img src="{{ vich_uploader_asset(movie.image, 'imageFile') }}" class="img-fluid col-5"/></td>
                             <td>
                                 <ul>
                                     <li>

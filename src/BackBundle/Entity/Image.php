@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity
+ * @Vich\Uploadable
  * @ORM\Table(name="image")
  */
 class Image

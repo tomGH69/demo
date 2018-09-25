@@ -3,8 +3,8 @@
 namespace BackBundle\Entity\Media;
 
 use BackBundle\Traits\DoctrineId;
-use BackBundle\Traits\Timestampable;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * Episode
@@ -15,7 +15,7 @@ class Episode
 {
 
     use DoctrineId;
-    use Timestampable;
+    use TimestampableEntity;
 
     /**
      * @var

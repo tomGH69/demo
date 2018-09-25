@@ -4,7 +4,6 @@ namespace BackBundle\Form\Media;
 
 use BackBundle\Form\ImageType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,9 +14,13 @@ class MovieType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('length')->add('title')->add('description')->add('year')
+        $builder->add('length')
+            ->add('title')
+            ->add('description')
+            ->add('year')
             ->add('image', ImageType::class)
-            ->add('actors')->add('directors');
+            ->add('actors')
+            ->add('directors');
     }
 
     /**

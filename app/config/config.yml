@@ -85,5 +85,14 @@ vich_uploader:
     db_driver: orm # or mongodb or propel or phpcr
     mappings:
         image:
-            uri_prefix: /images
+            uri_prefix: /uploads/images
             upload_destination: '%kernel.project_dir%/web/uploads/images'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+stof_doctrine_extensions:
+    default_locale: fr_FR
+    orm:
+        default:
+            timestampable: true
