@@ -3,6 +3,7 @@
 namespace BackBundle\Controller\Media;
 
 use BackBundle\Entity\Media\Movie;
+use BackBundle\Utils\Util;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -48,27 +49,16 @@ class MovieController extends Controller
             $em->persist($movie);
             $em->flush();
 
-            return $this->redirectToRoute('media_movie_show', array('id' => $movie->getId()));
+            return $this->redirectToRoute('media_movie_index');
         }
 
         return $this->render('@Back/media/movie/new.html.twig', array(
             'movie' => $movie,
             'form' => $form->createView(),
+            'type' => Util::FORM_NEW
         ));
     }
 
-    /**
-     * Finds and displays a movie entity.
-     *
-     * @Route("/{id}", name="media_movie_show")
-     * @Method("GET")
-     */
-    public function showAction(Movie $movie)
-    {
-        return $this->render('@Back/media/movie/show.html.twig', array(
-            'movie' => $movie
-        ));
-    }
 
     /**
      * Displays a form to edit an existing movie entity.
@@ -87,9 +77,10 @@ class MovieController extends Controller
             return $this->redirectToRoute('media_movie_edit', array('id' => $movie->getId()));
         }
 
-        return $this->render('@Back/media/movie/edit.html.twig', array(
+        return $this->render('@Back/media/movie/new.html.twig', array(
             'movie' => $movie,
-            'edit_form' => $editForm->createView()
+            'form' => $editForm->createView(),
+            'type' => Util::FORM_EDIT
         ));
     }
 

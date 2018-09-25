@@ -15,7 +15,7 @@ class TvShow extends Media
 {
 
     /**
-     * @ORM\OneToMany(targetEntity="BackBundle\Entity\Media\Episode", mappedBy="tvShow")
+     * @ORM\OneToMany(targetEntity="BackBundle\Entity\Media\Episode", mappedBy="tvShow", cascade={"persist"})
      */
     private $episodes;
 
@@ -37,6 +37,8 @@ class TvShow extends Media
     public function __construct()
     {
         $this->episodes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->actors = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->directors = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 

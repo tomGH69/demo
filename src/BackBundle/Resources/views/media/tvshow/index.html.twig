@@ -1,45 +1,55 @@
 {% extends '@Back/back_base.html.twig' %}
 
 {% block body %}
-    <h1>Tvshows list</h1>
+    <div class="row">
+        <div class="col-12">
+            <h1 class="h1">Tvshows list</h1>
+            <a href="{{ path('media_tvshow_new') }}" class="btn btn-primary">ADD A TV SHOW</a>
+            {% if tvShows is not empty %}
+                <table class="table">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Actors</th>
+                        <th>Director(s)</th>
+                        <th>Description</th>
+                        <th>Year</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for tvShow in tvShows %}
+                        <tr>
+                            <td>{{ tvShow.title }}</td>
+                            <td>{% for actor in tvShow.actors %}{{ actor }}{% if not loop.last %}
+                                    <br>{% endif %}{% endfor %}
+                            </td>
+                            <td>{% for director in tvShow.directors %}{{ director }}{% if not loop.last %}
+                                    <br>{% endif %}{% endfor %}</td>
+                            <td>{{ tvShow.description }}</td>
+                            <td>{{ tvShow.year }}</td>
+                            <td><img src="{{ vich_uploader_asset(tvShow.image, 'imageFile') }}"
+                                     class="img-fluid col-5"/></td>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('media_tvshow_edit', { 'id': tvShow.id }) }}">Show / edit</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('media_tvshow_delete', { 'id': tvShow.id }) }}">Delete</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="row mt-1">
+                    <div class="col-12 alert alert-danger">No tv show found</div>
+                </div>
+            {% endif %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Year</th>
-                <th>Image</th>
-                <th>Id</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for tvShow in tvShows %}
-            <tr>
-                <td><a href="{{ path('media_tvshow_show', { 'id': tvShow.id }) }}">{{ tvShow.title }}</a></td>
-                <td>{{ tvShow.description }}</td>
-                <td>{{ tvShow.year }}</td>
-                <td>{{ tvShow.image }}</td>
-                <td>{{ tvShow.id }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('media_tvshow_show', { 'id': tvShow.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('media_tvshow_edit', { 'id': tvShow.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('media_tvshow_new') }}">Create a new tvShow</a>
-        </li>
-    </ul>
+        </div>
+    </div>
 {% endblock %}

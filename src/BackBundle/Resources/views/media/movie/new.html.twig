@@ -1,20 +1,14 @@
 {% extends '@Back/back_base.html.twig' %}
 
 {% block body %}
-    <h1 class="h1">Add movie</h1>
+    <h1 class="h1">{% if type is constant('BackBundle\\Utils\\Util::FORM_EDIT') %}Edit {{ movie.title }}{% else %}Add movie{% endif %}</h1>
     {{ form_start(form) }}
-    {% for child in form.children %}
-        {% if child.vars.name != "_token" %}
-            <div class="form-group">
-                {{ form_label(child) }}
-                {{ form_widget(child) }}
-            </div>
-        {% endif %}
-    {% endfor %}
-    {{ form_widget(form._token) }}
+    {{ form_widget(form) }}
     <div class="form-row text-center">
         <div class="col-12">
-            <input type="submit" value="Create" class="btn btn-primary btn-lg"/>
+            <input type="submit"
+                   value="{% if type is constant('BackBundle\\Utils\\Util::FORM_EDIT') %}EDIT{% else %}CREATE{% endif %}"
+                   class="btn btn-primary btn-lg"/>
         </div>
     </div>
     {{ form_end(form) }}

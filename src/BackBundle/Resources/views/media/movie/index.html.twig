@@ -3,7 +3,7 @@
 {% block body %}
     <div class="row">
         <div class="col-12">
-            <h1 class="h1">Films</h1>
+            <h1 class="h1">Movies</h1>
             <a href="{{ path('media_movie_new') }}" class="btn btn-primary">ADD A MOVIE</a>
             {% if movies is not empty %}
                 <table class="table">
@@ -26,18 +26,17 @@
                             <td>{% for actor in movie.actors %}{{ actor }}{% if not loop.last %}
                                     <br>{% endif %}{% endfor %}
                             </td>
-                            <td>{% for director in movie.directors %}{{ director }}{% endfor %}</td>
+                            <td>{% for director in movie.directors %}{{ director }}{% if not loop.last %}
+                                    <br>{% endif %}{% endfor %}</td>
                             <td>{{ movie.description }}</td>
                             <td>{{ movie.length }}mn</td>
                             <td>{{ movie.year }}</td>
-                            <td><img src="{{ vich_uploader_asset(movie.image, 'imageFile') }}" class="img-fluid col-5"/></td>
+                            <td><img src="{{ vich_uploader_asset(movie.image, 'imageFile') }}" class="img-fluid col-5"/>
+                            </td>
                             <td>
                                 <ul>
                                     <li>
-                                        <a href="{{ path('media_movie_show', { 'id': movie.id }) }}">Show</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path('media_movie_edit', { 'id': movie.id }) }}">Edit</a>
+                                        <a href="{{ path('media_movie_edit', { 'id': movie.id }) }}">Show / Edit</a>
                                     </li>
                                     <li>
                                         <a href="{{ path('media_movie_delete', { 'id': movie.id }) }}">Delete</a>

@@ -1,16 +1,31 @@
 {% extends '@Back/back_base.html.twig' %}
-
+{% block js %}
+{{ parent() }}
+    <script src="{{ asset('bundles/back/js/episode.js') }}"></script>
+{% endblock %}
 {% block body %}
-    <h1>Tvshow creation</h1>
+    <h1 class="h1">{% if type is constant('BackBundle\\Utils\\Util::FORM_EDIT') %}Edit {{ tvShow.title }}{% else %}Add Tv Show{% endif %}</h1>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('media_tvshow_index') }}">Back to the list</a>
-        </li>
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.year) }}
+    {{ form_row(form.image) }}
+    {{ form_row(form.actors) }}
+    {{ form_row(form.directors) }}
+    {{ form_label(form.episodes) }}
+    <ul class="episodes" data-prototype="{{ form_widget(form.episodes.vars.prototype)|e('html_attr') }}">
+        {% for episode in form.episodes %}
+            <li>
+                {{ form_widget(episode) }}
+            </li>
+        {% endfor %}
     </ul>
+    {{ form_widget(form._token) }}
+    <div class="form-row text-center">
+        <div class="col-12">
+            <input type="submit" value="Create" class="btn btn-primary btn-lg"/>
+        </div>
+    </div>
+
 {% endblock %}

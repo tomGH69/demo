@@ -4,6 +4,8 @@ namespace BackBundle\Controller\Media;
 
 use BackBundle\Entity\Media\Episode;
 use BackBundle\Entity\Media\TvShow;
+use BackBundle\Utils\Util;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -50,72 +52,13 @@ class TvShowController extends Controller
             $em->persist($tvShow);
             $em->flush();
 
-            return $this->redirectToRoute('media_tvshow_show', array('id' => $tvShow->getId()));
+            return $this->redirectToRoute('media_tvshow_index');
         }
 
         return $this->render('@Back/media/tvshow/new.html.twig', array(
             'tvShow' => $tvShow,
             'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Creates a new episode entity.
-     *
-     * @Route("/new-episode/{id}", name="media_tvshow_new_episode")
-     * @Method({"GET", "POST"})
-     */
-    public function newEpisodeAction(Request $request, TvShow $tvShow)
-    {
-        $episode = new Episode();
-
-        $form = $this->createForm('BackBundle\Form\Media\EpisodeType', $episode);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $episode->setTvShow($tvShow);
-            $em->persist($episode);
-            $em->flush();
-
-            return $this->redirectToRoute('media_tvshow_episodes', array('id' => $tvShow->getId()));
-        }
-
-        return $this->render('@Back/media/tvshow/new_episode.html.twig', array(
-            'episode' => $episode,
-            'form' => $form->createView()));
-
-    }
-
-    /**
-     * Show all episodes of a tv show.
-     *
-     * @Route("/show-episodes/{id}", name="media_tvshow_show_episodes")
-     * @Method({"GET", "POST"})
-     */
-    public function showEpisodesAction(Request $request, TvShow $tvShow)
-    {
-        $episodes = $this->getDoctrine()->getRepository('BackBundle:Media\Episode')->findBy(array('tvShow' => $tvShow));
-
-        return $this->render('@Back/media/tvshow/show_episodes.html.twig', array('episodes' => $episodes));
-
-    }
-
-
-    /**
-     * Finds and displays a tvShow entity.
-     *
-     * @Route("/{id}", name="media_tvshow_show")
-     * @Method("GET")
-     */
-    public function showAction(TvShow $tvShow)
-    {
-        $deleteForm = $this->createDeleteForm($tvShow);
-
-        return $this->render('@Back/media/tvshow/show.html.twig', array(
-            'tvShow' => $tvShow,
-            'delete_form' => $deleteForm->createView(),
+            'type' => Util::FORM_NEW
         ));
     }
 
@@ -127,55 +70,49 @@ class TvShowController extends Controller
      */
     public function editAction(Request $request, TvShow $tvShow)
     {
-        $deleteForm = $this->createDeleteForm($tvShow);
         $editForm = $this->createForm('BackBundle\Form\Media\TvShowType', $tvShow);
+        $originalEpisodes = new ArrayCollection();
+
+        // Create an ArrayCollection of the current Tag objects in the database
+        foreach ($tvShow->getEpisodes() as $episode) {
+            $originalEpisodes->add($episode);
+        }
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
 
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            foreach ($originalEpisodes as $episode) {
+                if (false === $tvShow->getEpisodes()->contains($episode)) {
+                    $em->remove($episode);
+                }
+            }
+            foreach ($tvShow->getEpisodes() as $episode) {
+                $episode->setTvShow($tvShow);
+            }
+            $em->persist($tvShow);
+            $em->flush();
             return $this->redirectToRoute('media_tvshow_edit', array('id' => $tvShow->getId()));
         }
 
-        return $this->render('@Back/media/tvshow/edit.html.twig', array(
+        return $this->render('@Back/media/tvshow/new.html.twig', array(
             'tvShow' => $tvShow,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'form' => $editForm->createView(),
+            'type' => Util::FORM_EDIT
         ));
     }
 
     /**
-     * Deletes a tvShow entity.
+     * Deletes a movie entity.
      *
-     * @Route("/{id}", name="media_tvshow_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="media_tvshow_delete")
+     * @Method("GET")
      */
     public function deleteAction(Request $request, TvShow $tvShow)
     {
-        $form = $this->createDeleteForm($tvShow);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($tvShow);
-            $em->flush();
-        }
-
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($tvShow);
+        $em->flush();
         return $this->redirectToRoute('media_tvshow_index');
-    }
-
-    /**
-     * Creates a form to delete a tvShow entity.
-     *
-     * @param TvShow $tvShow The tvShow entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(TvShow $tvShow)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('media_tvshow_delete', array('id' => $tvShow->getId())))
-            ->setMethod('DELETE')
-            ->getForm();
     }
 }
