@@ -3,8 +3,11 @@
 namespace BackBundle\Entity\Media;
 
 use BackBundle\Entity\Media;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * TvShow
@@ -18,8 +21,15 @@ class TvShow extends Media
      * @ORM\OneToMany(targetEntity="BackBundle\Entity\Media\Episode", mappedBy="tvShow", cascade={"persist"})
      */
     private $episodes;
-    
 
+    /**
+     * TvShow constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->episodes = new ArrayCollection();
+    }
 
     /**
      * Set title

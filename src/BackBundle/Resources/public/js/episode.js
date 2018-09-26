@@ -1,7 +1,7 @@
 var $collectionHolder;
 
 // setup an "add a tag" link
-var $addEpisodeButton = $('<button type="button" class="add_tv_link">Add a episode</button>');
+var $addEpisodeButton = $('<button type="button" class="btn btn-primary add_tv_link">Add a episode</button>');
 var $newLinkLi = $('<li></li>').append($addEpisodeButton);
 
 $(document).ready(function () {
@@ -53,7 +53,7 @@ function addEpisodeForm($collectionHolder, $newLinkLi) {
 }
 
 function addEpisodeFormDeleteLink($episodeFormLi) {
-    var $removeFormButton = $('<button type="button">Delete this episode</button>');
+    var $removeFormButton = $('<button type="button" class="btn btn-secondary">Delete this episode</button>');
     $episodeFormLi.append($removeFormButton);
 
     $removeFormButton.on('click', function (e) {

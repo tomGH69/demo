@@ -5,6 +5,7 @@ namespace BackBundle\Entity;
 use BackBundle\Traits\DoctrineId;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Media
@@ -24,18 +25,21 @@ abstract class Media
     /**
      * @var
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
      */
     protected $title;
 
     /**
      * @var
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     protected $description;
 
     /**
      * @var
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank()
      */
     protected $year;
 
@@ -43,6 +47,7 @@ abstract class Media
      * @var Image
      * @ORM\OneToOne(targetEntity="BackBundle\Entity\Image", cascade={"persist"})
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * @Assert\NotBlank()
      */
     protected $image;
 
@@ -50,12 +55,14 @@ abstract class Media
     /**
      * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Actor", inversedBy="medias")
      * @ORM\JoinTable(name="medias_actors")
+     * @Assert\NotBlank()
      */
     protected $actors;
 
     /**
      * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Director", inversedBy="medias")
      * @ORM\JoinTable(name="medias_directors")
+     * @Assert\NotBlank()
      */
     protected $directors;
 

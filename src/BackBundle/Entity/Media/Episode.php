@@ -5,6 +5,7 @@ namespace BackBundle\Entity\Media;
 use BackBundle\Traits\DoctrineId;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Episode
@@ -20,18 +21,22 @@ class Episode
     /**
      * @var
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank()
+     * @Assert\Type("int")
      */
     private $season;
 
     /**
      * @var
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank()
+     * @Assert\Type("int")
      */
     private $episode;
 
     /**
      * @var
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $title;
 
@@ -43,7 +48,7 @@ class Episode
 
     /**
      * @var
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(type="smallint", nullable=true)
      */
     private $length;
 
@@ -166,33 +171,5 @@ class Episode
     public function getLength(): ?int
     {
         return $this->length;
-    }
-
-    /**
-     * Set created.
-     *
-     * @param \DateTime $created
-     *
-     * @return Episode
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
-    /**
-     * Set updated.
-     *
-     * @param \DateTime $updated
-     *
-     * @return Episode
-     */
-    public function setUpdated($updated)
-    {
-        $this->updated = $updated;
-
-        return $this;
     }
 }

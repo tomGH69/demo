@@ -5,6 +5,8 @@ namespace BackBundle\Entity\Media;
 use BackBundle\Entity\Media;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Movie
@@ -17,6 +19,7 @@ class Movie extends Media
     /**
      * @var
      * @ORM\Column(type="smallint")
+     * @Assert\NotBlank()
      */
     private $length;
     
@@ -135,7 +138,7 @@ class Movie extends Media
      *
      * @param \BackBundle\Entity\Person\Actor $actor
      */
-    public function removeActor(\BackBundle\Entity\Person\Actor $actor)
+    public function removeActor(\BackBundle\Entity\Person\Actor $actor): void
     {
         $this->actors->removeElement($actor);
     }
@@ -169,7 +172,7 @@ class Movie extends Media
      *
      * @param \BackBundle\Entity\Person\Director $director
      */
-    public function removeDirector(\BackBundle\Entity\Person\Director $director)
+    public function removeDirector(\BackBundle\Entity\Person\Director $director): void
     {
         $this->directors->removeElement($director);
     }

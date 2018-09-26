@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class MovieControllerTest extends WebTestCase
 {
-    /*
+/*
     public function testCompleteScenario()
     {
         // Create a new client to browse the application
@@ -19,7 +19,7 @@ class MovieControllerTest extends WebTestCase
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'backbundle_media_movie[field_name]'  => 'Test',
+            'backbundle_media_movie[field_name]' => 'Test',
             // ... other fields to fill
         ));
 
@@ -33,7 +33,7 @@ class MovieControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Update')->form(array(
-            'backbundle_media_movie[field_name]'  => 'Foo',
+            'backbundle_media_movie[field_name]' => 'Foo',
             // ... other fields to fill
         ));
 
@@ -50,6 +50,6 @@ class MovieControllerTest extends WebTestCase
         // Check the entity has been delete on the list
         $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
     }
+*/
 
-    */
 }

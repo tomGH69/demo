@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <h1 class="h1">Tvshows list</h1>
-            <a href="{{ path('media_tvshow_new') }}" class="btn btn-primary">ADD A TV SHOW</a>
+            <a href="{{ path('media_tvshow_new') }}" class="btn btn-primary mb-4">ADD A TV SHOW</a>
             {% if tvShows is not empty %}
                 <table class="table">
                     <thead class="table-dark">
@@ -31,7 +31,7 @@
                             <td>{{ tvShow.year }}</td>
                             <td>{% if tvShow.image is not null %}<img
                                     src="{{ vich_uploader_asset(tvShow.image, 'imageFile') }}"
-                                    class="img-fluid col-5"/>{% endif %}</td>
+                                    class="img-fluid"/>{% endif %}</td>
                             <td>
                                 <ul>
                                     <li>
