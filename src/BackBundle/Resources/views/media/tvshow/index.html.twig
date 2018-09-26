@@ -14,6 +14,7 @@
                         <th>Director(s)</th>
                         <th>Description</th>
                         <th>Year</th>
+                        <th>Thumbnail</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -28,8 +29,9 @@
                                     <br>{% endif %}{% endfor %}</td>
                             <td>{{ tvShow.description }}</td>
                             <td>{{ tvShow.year }}</td>
-                            <td><img src="{{ vich_uploader_asset(tvShow.image, 'imageFile') }}"
-                                     class="img-fluid col-5"/></td>
+                            <td>{% if tvShow.image is not null %}<img
+                                    src="{{ vich_uploader_asset(tvShow.image, 'imageFile') }}"
+                                    class="img-fluid col-5"/>{% endif %}</td>
                             <td>
                                 <ul>
                                     <li>

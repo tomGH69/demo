@@ -17,6 +17,12 @@ class Director extends Person
      */
     private $movies;
 
+
+    /**
+     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Media\TvShow", mappedBy="directors")
+     */
+    private $tvShows;
+
     /**
      * Set name
      *
@@ -71,6 +77,7 @@ class Director extends Person
     public function __construct()
     {
         $this->movies = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tvShows = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -105,5 +112,41 @@ class Director extends Person
     public function getMovies()
     {
         return $this->movies;
+    }
+
+    /**
+     * Add tvShow.
+     *
+     * @param \BackBundle\Entity\Media\TvShow $tvShow
+     *
+     * @return Director
+     */
+    public function addTvShow(\BackBundle\Entity\Media\TvShow $tvShow)
+    {
+        $this->tvShows[] = $tvShow;
+
+        return $this;
+    }
+
+    /**
+     * Remove tvShow.
+     *
+     * @param \BackBundle\Entity\Media\TvShow $tvShow
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeTvShow(\BackBundle\Entity\Media\TvShow $tvShow)
+    {
+        return $this->tvShows->removeElement($tvShow);
+    }
+
+    /**
+     * Get tvShows.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTvShows()
+    {
+        return $this->tvShows;
     }
 }

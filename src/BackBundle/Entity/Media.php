@@ -48,6 +48,27 @@ abstract class Media
 
 
     /**
+     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Actor", inversedBy="medias")
+     * @ORM\JoinTable(name="medias_actors")
+     */
+    protected $actors;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Director", inversedBy="medias")
+     * @ORM\JoinTable(name="medias_directors")
+     */
+    protected $directors;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->actors = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->directors = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Set title
      *
      * @param string $title
@@ -121,34 +142,6 @@ abstract class Media
 
 
     /**
-     * Set created.
-     *
-     * @param \DateTime $created
-     *
-     * @return Media
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
-    /**
-     * Set updated.
-     *
-     * @param \DateTime $updated
-     *
-     * @return Media
-     */
-    public function setUpdated($updated)
-    {
-        $this->updated = $updated;
-
-        return $this;
-    }
-
-    /**
      * Set image.
      *
      * @param \BackBundle\Entity\Image|null $image
@@ -170,5 +163,77 @@ abstract class Media
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add actor.
+     *
+     * @param \BackBundle\Entity\Person\Actor $actor
+     *
+     * @return Media
+     */
+    public function addActor(\BackBundle\Entity\Person\Actor $actor)
+    {
+        $this->actors[] = $actor;
+
+        return $this;
+    }
+
+    /**
+     * Remove actor.
+     *
+     * @param \BackBundle\Entity\Person\Actor $actor
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeActor(\BackBundle\Entity\Person\Actor $actor)
+    {
+        return $this->actors->removeElement($actor);
+    }
+
+    /**
+     * Get actors.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActors()
+    {
+        return $this->actors;
+    }
+
+    /**
+     * Add director.
+     *
+     * @param \BackBundle\Entity\Person\Director $director
+     *
+     * @return Media
+     */
+    public function addDirector(\BackBundle\Entity\Person\Director $director)
+    {
+        $this->directors[] = $director;
+
+        return $this;
+    }
+
+    /**
+     * Remove director.
+     *
+     * @param \BackBundle\Entity\Person\Director $director
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeDirector(\BackBundle\Entity\Person\Director $director)
+    {
+        return $this->directors->removeElement($director);
+    }
+
+    /**
+     * Get directors.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDirectors()
+    {
+        return $this->directors;
     }
 }

@@ -19,18 +19,7 @@ class Movie extends Media
      * @ORM\Column(type="smallint")
      */
     private $length;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Actor", inversedBy="movies")
-     * @ORM\JoinTable(name="movies_actors")
-     */
-    protected $actors;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Director", inversedBy="movies")
-     * @ORM\JoinTable(name="movies_directors")
-     */
-    protected $directors;
+    
 
     /**
      * Set title
@@ -126,14 +115,6 @@ class Movie extends Media
         return $this->length;
     }
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->actors = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->directors = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add actor
@@ -226,4 +207,6 @@ class Movie extends Media
     {
         return $this->image;
     }
+
+
 }

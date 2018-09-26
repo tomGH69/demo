@@ -1,6 +1,6 @@
 {% extends '@Back/back_base.html.twig' %}
 {% block js %}
-{{ parent() }}
+    {{ parent() }}
     <script src="{{ asset('bundles/back/js/episode.js') }}"></script>
 {% endblock %}
 {% block body %}
@@ -24,7 +24,9 @@
     {{ form_widget(form._token) }}
     <div class="form-row text-center">
         <div class="col-12">
-            <input type="submit" value="Create" class="btn btn-primary btn-lg"/>
+            <input type="submit"
+                   value="{% if type is constant('BackBundle\\Utils\\Util::FORM_EDIT') %}Edit{% else %}Create{% endif %}"
+                   class="btn btn-primary btn-lg"/>
         </div>
     </div>
 

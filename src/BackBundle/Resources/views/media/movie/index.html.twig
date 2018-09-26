@@ -31,7 +31,7 @@
                             <td>{{ movie.description }}</td>
                             <td>{{ movie.length }}mn</td>
                             <td>{{ movie.year }}</td>
-                            <td><img src="{{ vich_uploader_asset(movie.image, 'imageFile') }}" class="img-fluid col-5"/>
+                            <td>{% if movie.image is not null %}<img src="{{ vich_uploader_asset(movie.image, 'imageFile') }}" class="img-fluid col-5"/>{% endif %}
                             </td>
                             <td>
                                 <ul>

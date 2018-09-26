@@ -14,12 +14,7 @@ class ImageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('imageFile', VichImageType::class, array(
-            'required' => false,
-            'allow_delete' => true,
-            'download_label' => 'Download',
-            'download_uri' => true,
-            'image_uri' => true));
+        $builder->add('imageFile', VichImageType::class);
     }
 
     /**

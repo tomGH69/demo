@@ -18,28 +18,7 @@ class TvShow extends Media
      * @ORM\OneToMany(targetEntity="BackBundle\Entity\Media\Episode", mappedBy="tvShow", cascade={"persist"})
      */
     private $episodes;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Actor", inversedBy="tvShows")
-     * @ORM\JoinTable(name="tvshows_actors")
-     */
-    protected $actors;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Director", inversedBy="tvShows")
-     * @ORM\JoinTable(name="tvshows_directors")
-     */
-    protected $directors;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->episodes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->actors = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->directors = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    
 
 
     /**
