@@ -1,6 +1,15 @@
-Demo de présentation de mes compétences
+demo of my technical skills
 =======
 
-Démo d'un site allociné-like 
+Presented as an IMDb-like website
+
+#Model
+
+    - Abstract class Media
+        - [class Movie extends Media](https://github.com/tomGH69/demo/blob/develop/src/BackBundle/Entity/Media/Movie.php)
+        - class TvShow extends Media
+          
+       
+
 
 
