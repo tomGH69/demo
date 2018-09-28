@@ -5,7 +5,8 @@ Presented as an IMDb-like website
 
 For now, only back office is done, the front is next to come
 
-#Model
+Model
+=======
 - [Abstract class Media](https://github.com/tomGH69/demo/blob/develop/src/BackBundle/Entity/Media.php)
     - [class Movie extends Media](https://github.com/tomGH69/demo/blob/develop/src/BackBundle/Entity/Media/Movie.php)
     - [class TvShow extends Media](https://github.com/tomGH69/demo/blob/develop/src/BackBundle/Entity/Media/TvShow.php)
@@ -19,10 +20,10 @@ For now, only back office is done, the front is next to come
 - FOS [class User](https://github.com/tomGH69/demo/blob/develop/src/BackBundle/Entity/User.php)          
 
 
-#Used Bundles
-
-#To Do
-
+External Bundles
+=======
+To Do
+=======
 - Front
 
 - APIs
