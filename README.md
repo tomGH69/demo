@@ -20,6 +20,14 @@ Model
 
 - FOS [class User](https://github.com/tomGH69/demo/blob/develop/src/BackBundle/Entity/User.php)          
 
+Technical skills used
+=======
+- Doctrine Inheritance with discriminator
+- Doctrine QueryBuilder
+- Constraints validator
+- PHP Trait
+- JSON Serializer
+- PHP7 parameters and returns type
 
 External Bundles
 =======
