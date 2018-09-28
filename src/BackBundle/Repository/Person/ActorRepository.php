@@ -1,6 +1,6 @@
 <?php
 
-namespace BackBundle\Repository;
+namespace BackBundle\Repository\Person;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -17,7 +17,8 @@ class ActorRepository extends EntityRepository
             ->where('a.name LIKE :query or a.firstname LIKE :query')
             ->setParameter('query', "%$query%")
             ->setMaxResults(10)
-            ->orderBy('a.name, a.firstname')
+            ->orderBy('a.name', 'ASC')
+            ->orderBy('a.firstname', 'ASC')
             ->getQuery()
             ->getResult();
     }
