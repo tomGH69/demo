@@ -39,11 +39,14 @@ class TetranzSelectModel
     }
 
     /**
-     * @param $id
+     * @param int $id
+     * @return TetranzSelectModel
      */
-    public function setId(int $id): void
+    public function setId(int $id): TetranzSelectModel
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -55,11 +58,14 @@ class TetranzSelectModel
     }
 
     /**
-     * @param $text
+     * @param string $text
+     * @return TetranzSelectModel
      */
-    public function setText(string $text): void
+    public function setText(string $text): TetranzSelectModel
     {
         $this->text = $text;
+
+        return $this;
     }
 
 

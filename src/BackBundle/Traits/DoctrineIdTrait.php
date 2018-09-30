@@ -2,6 +2,10 @@
 
 namespace BackBundle\Traits;
 
+/**
+ * Trait DoctrineIdTrait
+ * @package BackBundle\Traits
+ */
 trait DoctrineIdTrait
 {
     /**

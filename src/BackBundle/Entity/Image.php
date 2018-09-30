@@ -74,7 +74,7 @@ class Image
      *
      * @return Image
      */
-    public function setImageName(?string $imageName): Image
+    public function setImageName(string $imageName): Image
     {
         $this->imageName = $imageName;
 
@@ -86,7 +86,7 @@ class Image
      *
      * @return string
      */
-    public function getImageName(): ?string
+    public function getImageName(): string
     {
         return $this->imageName;
     }
@@ -98,7 +98,7 @@ class Image
      *
      * @return Image
      */
-    public function setImageSize(?int $imageSize): Image
+    public function setImageSize(int $imageSize): Image
     {
         $this->imageSize = $imageSize;
 
@@ -110,7 +110,7 @@ class Image
      *
      * @return int
      */
-    public function getImageSize(): ?int
+    public function getImageSize(): int
     {
         return $this->imageSize;
     }

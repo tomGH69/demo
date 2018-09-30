@@ -2,6 +2,10 @@
 
 namespace BackBundle\Utils;
 
+/**
+ * Class Util
+ * @package BackBundle\Utils
+ */
 class Util
 {
 

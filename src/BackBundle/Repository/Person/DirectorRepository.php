@@ -4,14 +4,18 @@ namespace BackBundle\Repository\Person;
 
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class DirectorRepository
+ * @package BackBundle\Repository\Person
+ */
 class DirectorRepository extends EntityRepository
 {
 
     /**
-     * @param $query
-     * @return array
+     * @param string $query
+     * @return mixed
      */
-    public function findLike($query)
+    public function findLike(string $query)
     {
         return $this->createQueryBuilder('d')
             ->where('d.name LIKE :query or d.firstname LIKE :query')
