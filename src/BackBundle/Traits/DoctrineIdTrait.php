@@ -2,7 +2,7 @@
 
 namespace BackBundle\Traits;
 
-trait DoctrineId
+trait DoctrineIdTrait
 {
     /**
      * @ORM\Id

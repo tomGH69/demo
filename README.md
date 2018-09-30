@@ -27,7 +27,7 @@ Technical skills used
 - Constraints validator
 - PHP Trait
 - JSON Serializer
-- PHP7 parameters and returns type
+- PHP7 type hints and returns type
 
 External Bundles
 =======

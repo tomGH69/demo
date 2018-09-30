@@ -2,7 +2,7 @@
 
 namespace BackBundle\Entity;
 
-use BackBundle\Traits\DoctrineId;
+use BackBundle\Traits\DoctrineIdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
@@ -18,7 +18,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 abstract class Person
 {
 
-    use DoctrineId;
+    use DoctrineIdTrait;
     use TimestampableEntity;
 
     /**
@@ -41,7 +41,7 @@ abstract class Person
      *
      * @return Person
      */
-    public function setName($name)
+    public function setName(?string $name): Person
     {
         $this->name = $name;
 
@@ -53,7 +53,7 @@ abstract class Person
      *
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -65,7 +65,7 @@ abstract class Person
      *
      * @return Person
      */
-    public function setFirstname($firstname)
+    public function setFirstname(?string $firstname): Person
     {
         $this->firstname = $firstname;
 
@@ -77,7 +77,7 @@ abstract class Person
      *
      * @return string
      */
-    public function getFirstname()
+    public function getFirstname(): ?string
     {
         return $this->firstname;
     }
@@ -85,7 +85,7 @@ abstract class Person
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): ?string
     {
         return $this->getFirstname() . ' ' . $this->getName();
     }

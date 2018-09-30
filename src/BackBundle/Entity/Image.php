@@ -2,8 +2,9 @@
 
 namespace BackBundle\Entity;
 
-use BackBundle\Traits\DoctrineId;
+use BackBundle\Traits\DoctrineIdTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -15,7 +16,8 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class Image
 {
-    use DoctrineId;
+    use DoctrineIdTrait;
+    use TimestampableEntity;
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
@@ -40,12 +42,6 @@ class Image
      */
     private $imageSize;
 
-    /**
-     * @ORM\Column(type="datetime")
-     *
-     * @var \DateTime
-     */
-    private $updatedAt;
 
     /**
      * @param File|null $image
@@ -78,7 +74,7 @@ class Image
      *
      * @return Image
      */
-    public function setImageName($imageName)
+    public function setImageName(?string $imageName): Image
     {
         $this->imageName = $imageName;
 
@@ -90,7 +86,7 @@ class Image
      *
      * @return string
      */
-    public function getImageName()
+    public function getImageName(): ?string
     {
         return $this->imageName;
     }
@@ -102,7 +98,7 @@ class Image
      *
      * @return Image
      */
-    public function setImageSize($imageSize)
+    public function setImageSize(?int $imageSize): Image
     {
         $this->imageSize = $imageSize;
 
@@ -114,32 +110,9 @@ class Image
      *
      * @return int
      */
-    public function getImageSize()
+    public function getImageSize(): ?int
     {
         return $this->imageSize;
     }
 
-    /**
-     * Set updatedAt.
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Image
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
 }

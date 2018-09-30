@@ -3,6 +3,8 @@
 namespace BackBundle\Entity\Person;
 
 use BackBundle\Entity\Person;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,7 +32,7 @@ class Actor extends Person
      *
      * @return Actor
      */
-    public function setName($name)
+    public function setName(?string $name): Person
     {
         $this->name = $name;
 
@@ -42,7 +44,7 @@ class Actor extends Person
      *
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -54,7 +56,7 @@ class Actor extends Person
      *
      * @return Actor
      */
-    public function setFirstname($firstname)
+    public function setFirstname(?string $firstname): Person
     {
         $this->firstname = $firstname;
 
@@ -66,17 +68,18 @@ class Actor extends Person
      *
      * @return string
      */
-    public function getFirstname()
+    public function getFirstname(): string
     {
         return $this->firstname;
     }
+
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->movies = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->tvShows = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->movies = new ArrayCollection();
+        $this->tvShows = new ArrayCollection();
     }
 
     /**
@@ -86,7 +89,7 @@ class Actor extends Person
      *
      * @return Actor
      */
-    public function addMovie(\BackBundle\Entity\Media\Movie $movie)
+    public function addMovie(\BackBundle\Entity\Media\Movie $movie): Actor
     {
         $this->movies[] = $movie;
 
@@ -94,13 +97,12 @@ class Actor extends Person
     }
 
     /**
-     * Remove movie
-     *
      * @param \BackBundle\Entity\Media\Movie $movie
+     * @return bool
      */
-    public function removeMovie(\BackBundle\Entity\Media\Movie $movie)
+    public function removeMovie(\BackBundle\Entity\Media\Movie $movie): bool
     {
-        $this->movies->removeElement($movie);
+        return $this->movies->removeElement($movie);
     }
 
     /**
@@ -108,7 +110,7 @@ class Actor extends Person
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getMovies()
+    public function getMovies(): Collection
     {
         return $this->movies;
     }
@@ -120,7 +122,7 @@ class Actor extends Person
      *
      * @return Actor
      */
-    public function addTvShow(\BackBundle\Entity\Media\TvShow $tvShow)
+    public function addTvShow(\BackBundle\Entity\Media\TvShow $tvShow): Actor
     {
         $this->tvShows[] = $tvShow;
 
@@ -128,13 +130,12 @@ class Actor extends Person
     }
 
     /**
-     * Remove tvShow
-     *
      * @param \BackBundle\Entity\Media\TvShow $tvShow
+     * @return bool
      */
-    public function removeTvShow(\BackBundle\Entity\Media\TvShow $tvShow)
+    public function removeTvShow(\BackBundle\Entity\Media\TvShow $tvShow): bool
     {
-        $this->tvShows->removeElement($tvShow);
+        return $this->tvShows->removeElement($tvShow);
     }
 
     /**
@@ -142,7 +143,7 @@ class Actor extends Person
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTvShows()
+    public function getTvShows(): Collection
     {
         return $this->tvShows;
     }

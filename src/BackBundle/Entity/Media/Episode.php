@@ -2,7 +2,7 @@
 
 namespace BackBundle\Entity\Media;
 
-use BackBundle\Traits\DoctrineId;
+use BackBundle\Traits\DoctrineIdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Episode
 {
 
-    use DoctrineId;
+    use DoctrineIdTrait;
     use TimestampableEntity;
 
     /**
