@@ -10,17 +10,24 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{{ path('media_movie_index') }}" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Films</a>
+                    <a class="nav-link dropdown-toggle" href="{{ path('media_movie_index') }}" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Movies</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="{{ path('media_movie_index') }}">Voir tous les films</a>
-                        <a class="dropdown-item" href="{{ path('media_movie_new') }}">Ajouter un film</a>
+                        <a class="dropdown-item" href="{{ path('media_movie_index') }}">List all movies</a>
+                        <a class="dropdown-item" href="{{ path('media_movie_new') }}">Add a movie</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Séries TV</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="{{ path('media_tvshow_index') }}">Voir toutes les séries</a>
-                        <a class="dropdown-item" href="{{ path('media_tvshow_new') }}">Ajouter une série TV</a>
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tv shows</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown02">
+                        <a class="dropdown-item" href="{{ path('media_tvshow_index') }}">List all tv shows</a>
+                        <a class="dropdown-item" href="{{ path('media_tvshow_new') }}">Add a tv show</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Users</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown03">
+                        <a class="dropdown-item" href="{{ path('user_index') }}">See all users</a>
+                        <a class="dropdown-item" href="{{ path('user_new') }}">Add an user</a>
                     </div>
                 </li>
             </ul>

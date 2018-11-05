@@ -6,7 +6,6 @@ namespace BackBundle\Controller;
 use BackBundle\Entity\User;
 use BackBundle\Form\UserType;
 use BackBundle\Utils\Util;
-use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
