@@ -1,0 +1,52 @@
+{% extends '@Back/back_base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="row">
+        <div class="col-12">
+            <h1 class="h1">Users</h1>
+            <a href="{{ path('user_new') }}" class="btn btn-primary mb-4">ADD A USER</a>
+            {% if users is not empty %}
+                <table class="table">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Roles</th>
+                        <th>Is Enabled</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.roles|join(' | ') }}</td>
+                            <td>{% if user.enabled == 1 %}Yes{% else %}No{% endif %}</td>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('user_edit', { 'id': user.id }) }}">Show / Edit</a>
+                                    </li>
+                                    <li>
+                                        {% if user.enabled == 1 %}
+                                            <a href="{{ path('user_deactivate', { 'id': user.id }) }}">Deactivate</a>
+                                        {% else %}
+                                            <a href="{{ path('user_activate', { 'id': user.id }) }}">Activate</a>
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="row mt-1">
+                    <div class="col-12 alert alert-danger">No user found</div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

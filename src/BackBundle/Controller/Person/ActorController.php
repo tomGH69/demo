@@ -3,6 +3,7 @@
 namespace BackBundle\Controller\Person;
 
 
+use BackBundle\Entity\Person\Actor;
 use BackBundle\Model\TetranzSelectModel;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -29,7 +30,7 @@ class ActorController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $query = $request->query->get('q');
-        $actors = $em->getRepository('BackBundle:Person\Actor')->findLike($query);
+        $actors = $em->getRepository(Actor::class)->findLike($query);
 
         $jsonResults = new ArrayCollection();
         foreach ($actors as $actor) {
