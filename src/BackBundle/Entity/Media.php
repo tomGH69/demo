@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Media
  *
  * @ORM\Table(name="media")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="BackBundle\Repository\MediaRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"movie" = "BackBundle\Entity\Media\Movie", "tvshow" = "BackBundle\Entity\Media\TvShow"})
@@ -25,21 +25,21 @@ abstract class Media
     /**
      * @var
      * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"create"})
      */
     protected $title;
 
     /**
      * @var
      * @ORM\Column(type="text")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"create"})
      */
     protected $description;
 
     /**
      * @var
      * @ORM\Column(type="smallint")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"create"})
      */
     protected $year;
 
@@ -47,7 +47,7 @@ abstract class Media
      * @var Image
      * @ORM\OneToOne(targetEntity="BackBundle\Entity\Image", cascade={"persist"})
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"create"})
      */
     protected $image;
 
@@ -55,14 +55,14 @@ abstract class Media
     /**
      * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Actor", inversedBy="medias")
      * @ORM\JoinTable(name="medias_actors")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"create"})
      */
     protected $actors;
 
     /**
      * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Director", inversedBy="medias")
      * @ORM\JoinTable(name="medias_directors")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"create"})
      */
     protected $directors;
 

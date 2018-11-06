@@ -2,11 +2,13 @@
 
 namespace BackBundle\Controller\Media;
 
-use BackBundle\Entity\Media\Episode;
+use BackBundle\Controller\BaseController;
+use BackBundle\Entity\Media;
 use BackBundle\Entity\Media\TvShow;
+use BackBundle\Form\Media\SearcherType;
+use BackBundle\Form\Media\TvShowType;
 use BackBundle\Utils\Util;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,22 +18,31 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("media_tvshow")
  */
-class TvShowController extends Controller
+class TvShowController extends BaseController
 {
     /**
      * Lists all tvShow entities.
      *
      * @Route("/", name="media_tvshow_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $tvShows = $em->getRepository('BackBundle:Media\TvShow')->findAll();
+        $tvShowsSearcher = new TvShow();
+        $formSearcher = $this->createForm(SearcherType::class, $tvShowsSearcher);
+        $formSearcher->handleRequest($request);
 
+        if ($formSearcher->isSubmitted() && $formSearcher->isValid()) {
+            $tvShows = $em->getRepository(Media::class)->filter($tvShowsSearcher, $this->get('back_filter'));
+        } else {
+            $tvShows = $em->getRepository(TvShow::class)->findAll();
+        }
+        $tvShows = $this->get('knp_paginator')->paginate($tvShows, $request->query->get('page', 1), 5);
         return $this->render('@Back/media/tvshow/index.html.twig', array(
             'tvShows' => $tvShows,
+            'formSearcher' => $formSearcher->createView()
         ));
     }
 
@@ -44,7 +55,7 @@ class TvShowController extends Controller
     public function newAction(Request $request)
     {
         $tvShow = new Tvshow();
-        $form = $this->createForm('BackBundle\Form\Media\TvShowType', $tvShow);
+        $form = $this->createForm(TvShowType::class, $tvShow);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -70,7 +81,7 @@ class TvShowController extends Controller
      */
     public function editAction(Request $request, TvShow $tvShow)
     {
-        $editForm = $this->createForm('BackBundle\Form\Media\TvShowType', $tvShow);
+        $editForm = $this->createForm(TvShowType::class, $tvShow);
         $originalEpisodes = new ArrayCollection();
 
         // Create an ArrayCollection of the current Tag objects in the database

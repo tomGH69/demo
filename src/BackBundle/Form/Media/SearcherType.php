@@ -2,14 +2,15 @@
 
 namespace BackBundle\Form\Media;
 
-use BackBundle\Form\ImageType;
+use BackBundle\Entity\Media;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
 
-class TvShowType extends AbstractType
+class SearcherType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -17,11 +18,11 @@ class TvShowType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('description')
-            ->add('year')
-            ->add('image', ImageType::class)
+            ->add('title', TextType::class, [
+                'required' => false,
+            ])
             ->add('actors', Select2EntityType::class, [
+                'required' => false,
                 'multiple' => true,
                 'remote_route' => 'person_actor_autocomplete',
                 'class' => 'BackBundle\Entity\Person\Actor',
@@ -34,6 +35,7 @@ class TvShowType extends AbstractType
                 'language' => 'en',
                 'placeholder' => 'Select an actor'])
             ->add('directors', Select2EntityType::class, [
+                'required' => false,
                 'multiple' => true,
                 'remote_route' => 'person_director_autocomplete',
                 'class' => 'BackBundle\Entity\Person\Director',
@@ -45,10 +47,8 @@ class TvShowType extends AbstractType
                 'cache' => false,
                 'language' => 'en',
                 'placeholder' => 'Select a director'])
-            ->add('episodes', CollectionType::class, array(
-                'entry_type' => EpisodeType::class,
-                'entry_options' => array('label' => false),
-                'allow_add' => true, 'allow_delete' => true,));
+            ->add('search', SubmitType::class);
+
     }
 
     /**
@@ -57,8 +57,7 @@ class TvShowType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackBundle\Entity\Media\TvShow',
-            'validation_groups' => array('create'),
+            'data_class' => Media::class
         ));
     }
 
@@ -67,7 +66,7 @@ class TvShowType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'backbundle_media_tvshow';
+        return 'backbundle_media_searcher';
     }
 
 

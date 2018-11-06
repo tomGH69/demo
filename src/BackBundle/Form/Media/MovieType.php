@@ -52,7 +52,8 @@ class MovieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackBundle\Entity\Media\Movie'
+            'data_class' => 'BackBundle\Entity\Media\Movie',
+            'validation_groups' => array('create'),
         ));
     }
 

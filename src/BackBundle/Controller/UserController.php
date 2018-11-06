@@ -4,7 +4,8 @@ namespace BackBundle\Controller;
 
 
 use BackBundle\Entity\User;
-use BackBundle\Form\UserType;
+use BackBundle\Form\User\UserEditType;
+use BackBundle\Form\User\UserNewType;
 use BackBundle\Utils\Util;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -40,7 +41,7 @@ class UserController extends BaseController
     {
         $user = $this->getUserManager()->createUser();
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserNewType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -66,12 +67,16 @@ class UserController extends BaseController
      */
     public function editAction(Request $request, User $user)
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserEditType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getUserManager()->updateUser($user, true);
-            return $this->redirectToRoute("user_edit", $user);
+            $this->addFlash(
+                'success',
+                'User edited'
+            );
+            return $this->redirectToRoute("user_edit", array('id' => $user->getId()));
         }
 
         return $this->render("@Back/user/new.html.twig", array(

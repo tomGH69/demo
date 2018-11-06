@@ -3,6 +3,7 @@
 namespace BackBundle\Controller\Person;
 
 
+use BackBundle\Controller\BaseController;
 use BackBundle\Entity\Person\Director;
 use BackBundle\Model\TetranzSelectModel;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("person_director")
  */
-class DirectorController extends Controller
+class DirectorController extends BaseController
 {
     /**
      * Autocomplete

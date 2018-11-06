@@ -7,3 +7,7 @@ services:
     class: BackBundle\Utils\Mailer
     public: true
     arguments: ["@mailer", "@monolog.logger.mailer"]
+
+  back_filter:
+    class:  BackBundle\Utils\Filter
+    public: true

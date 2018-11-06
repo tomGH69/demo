@@ -2,33 +2,49 @@
 
 namespace BackBundle\Controller\Media;
 
+use BackBundle\Controller\BaseController;
+use BackBundle\Entity\Media;
 use BackBundle\Entity\Media\Movie;
+use BackBundle\Form\Media\MovieType;
+use BackBundle\Form\Media\SearcherType;
 use BackBundle\Utils\Util;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Movie controller.
  *
  * @Route("media_movie")
  */
-class MovieController extends Controller
+class MovieController extends BaseController
 {
     /**
      * Lists all movie entities.
      *
      * @Route("/", name="media_movie_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $movies = $em->getRepository('BackBundle:Media\Movie')->findAll();
+        $movieSearcher = new Movie();
+        $formSearcher = $this->createForm(SearcherType::class, $movieSearcher);
+        $formSearcher->handleRequest($request);
+
+        if ($formSearcher->isSubmitted() && $formSearcher->isValid()) {
+            $movies = $em->getRepository(Media::class)->filter($movieSearcher, $this->get('back_filter'));
+        } else {
+            $movies = $em->getRepository(Movie::class)->findAll();
+        }
+
+        $movies = $this->get('knp_paginator')->paginate($movies, $request->query->get('page', 1), 5);
+
 
         return $this->render('@Back/media/movie/index.html.twig', array(
             'movies' => $movies,
+            'formSearcher' => $formSearcher->createView()
         ));
     }
 
@@ -41,7 +57,7 @@ class MovieController extends Controller
     public function newAction(Request $request)
     {
         $movie = new Movie();
-        $form = $this->createForm('BackBundle\Form\Media\MovieType', $movie);
+        $form = $this->createForm(MovieType::class, $movie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -68,7 +84,7 @@ class MovieController extends Controller
      */
     public function editAction(Request $request, Movie $movie)
     {
-        $editForm = $this->createForm('BackBundle\Form\Media\MovieType', $movie);
+        $editForm = $this->createForm(MovieType::class, $movie);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

@@ -19,7 +19,7 @@ class Movie extends Media
     /**
      * @var
      * @ORM\Column(type="smallint")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"create"})
      */
     private $length;
     
