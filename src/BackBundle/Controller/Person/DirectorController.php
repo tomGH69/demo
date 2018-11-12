@@ -4,6 +4,7 @@ namespace BackBundle\Controller\Person;
 
 
 use BackBundle\Controller\BaseController;
+use BackBundle\Entity\Person;
 use BackBundle\Entity\Person\Director;
 use BackBundle\Model\TetranzSelectModel;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -31,7 +32,7 @@ class DirectorController extends BaseController
     {
         $em = $this->getDoctrine()->getManager();
         $query = $request->query->get('q');
-        $directors = $em->getRepository(Director::class)->findLike($query);
+        $directors = $em->getRepository(Person::class)->findLike($query, Director::class);
 
         $jsonResults = new ArrayCollection();
         foreach ($directors as $director) {

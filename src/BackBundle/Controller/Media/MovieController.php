@@ -7,6 +7,8 @@ use BackBundle\Entity\Media;
 use BackBundle\Entity\Media\Movie;
 use BackBundle\Form\Media\MovieType;
 use BackBundle\Form\Media\SearcherType;
+use BackBundle\Utils\Filter;
+use BackBundle\Utils\Mailer;
 use BackBundle\Utils\Util;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -34,7 +36,7 @@ class MovieController extends BaseController
         $formSearcher->handleRequest($request);
 
         if ($formSearcher->isSubmitted() && $formSearcher->isValid()) {
-            $movies = $em->getRepository(Media::class)->filter($movieSearcher, $this->get('back_filter'));
+            $movies = $em->getRepository(Movie::class)->filter($movieSearcher, $this->get(Filter::class));
         } else {
             $movies = $em->getRepository(Movie::class)->findAll();
         }
@@ -88,8 +90,11 @@ class MovieController extends BaseController
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
+            $this->flush();
+            $this->addFlash(
+                'success',
+                'Movie edited'
+            );
             return $this->redirectToRoute('media_movie_edit', array('id' => $movie->getId()));
         }
 

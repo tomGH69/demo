@@ -53,29 +53,6 @@ abstract class Media
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Actor", inversedBy="medias")
-     * @ORM\JoinTable(name="medias_actors")
-     * @Assert\NotBlank(groups={"create"})
-     */
-    protected $actors;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Director", inversedBy="medias")
-     * @ORM\JoinTable(name="medias_directors")
-     * @Assert\NotBlank(groups={"create"})
-     */
-    protected $directors;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->actors = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->directors = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
      * Set title
      *
      * @param string $title

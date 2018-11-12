@@ -3,11 +3,13 @@ services:
 #        class: BackBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
 
-  back_mailer:
-    class: BackBundle\Utils\Mailer
+  BackBundle\Utils\Mailer:
     public: true
     arguments: ["@mailer", "@monolog.logger.mailer"]
+    autowire: true
 
-  back_filter:
-    class:  BackBundle\Utils\Filter
+  BackBundle\Utils\Filter:
     public: true
+    autowire: true
+
+

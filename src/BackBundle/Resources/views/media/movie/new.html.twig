@@ -1,8 +1,9 @@
 {% extends '@Back/back_base.html.twig' %}
 
 {% block body %}
+    {{ parent() }}
     <h1 class="h1">{% if type is constant('BackBundle\\Utils\\Util::FORM_EDIT') %}Edit {{ movie.title }}{% else %}Add movie{% endif %}</h1>
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
     {{ form_row(form.title) }}
     {{ form_row(form.description) }}

@@ -7,6 +7,7 @@ use BackBundle\Entity\Media;
 use BackBundle\Entity\Media\TvShow;
 use BackBundle\Form\Media\SearcherType;
 use BackBundle\Form\Media\TvShowType;
+use BackBundle\Utils\Filter;
 use BackBundle\Utils\Util;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -35,7 +36,7 @@ class TvShowController extends BaseController
         $formSearcher->handleRequest($request);
 
         if ($formSearcher->isSubmitted() && $formSearcher->isValid()) {
-            $tvShows = $em->getRepository(Media::class)->filter($tvShowsSearcher, $this->get('back_filter'));
+            $tvShows = $em->getRepository(TvShow::class)->filter($tvShowsSearcher, $this->get(Filter::class));
         } else {
             $tvShows = $em->getRepository(TvShow::class)->findAll();
         }

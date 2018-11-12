@@ -4,10 +4,10 @@ namespace BackBundle\Controller\Person;
 
 
 use BackBundle\Controller\BaseController;
+use BackBundle\Entity\Person;
 use BackBundle\Entity\Person\Actor;
 use BackBundle\Model\TetranzSelectModel;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +31,7 @@ class ActorController extends BaseController
     {
         $em = $this->getDoctrine()->getManager();
         $query = $request->query->get('q');
-        $actors = $em->getRepository(Actor::class)->findLike($query);
+        $actors = $em->getRepository(Person::class)->findLike($query, Actor::class);
 
         $jsonResults = new ArrayCollection();
         foreach ($actors as $actor) {

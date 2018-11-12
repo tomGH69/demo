@@ -11,10 +11,24 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Movie
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="BackBundle\Repository\Media\MovieRepository")
  */
 class Movie extends Media
 {
+
+    /**
+     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Actor", inversedBy="movies")
+     * @ORM\JoinTable(name="movies_actors")
+     * @Assert\NotBlank(groups={"create"})
+     */
+    private $actors;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Director", inversedBy="movies")
+     * @ORM\JoinTable(name="movies_directors")
+     * @Assert\NotBlank(groups={"create"})
+     */
+    private $directors;
 
     /**
      * @var
@@ -22,6 +36,15 @@ class Movie extends Media
      * @Assert\NotBlank(groups={"create"})
      */
     private $length;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->actors = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->directors = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     
 
     /**

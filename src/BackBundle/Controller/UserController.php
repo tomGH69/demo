@@ -49,6 +49,10 @@ class UserController extends BaseController
             $user->addRole("ROLE_ADMIN");
 
             $this->getUserManager()->updateUser($user, true);
+            $this->addFlash(
+                'success',
+                'User created'
+            );
             return $this->redirectToRoute("user_index");
         }
 

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Director
  *
- * @ORM\Entity(repositoryClass="BackBundle\Repository\Person\DirectorRepository")
+ * @ORM\Entity()
  */
 class Director extends Person
 {

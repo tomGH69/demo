@@ -10,7 +10,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  * Media
  *
  * @ORM\Table(name="person")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="BackBundle\Repository\PersonRepository")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"actor" = "BackBundle\Entity\Person\Actor", "director" = "BackBundle\Entity\Person\Director"})
@@ -32,6 +32,7 @@ abstract class Person
      * @ORM\Column(type="string")
      */
     protected $firstname;
+
 
 
     /**

@@ -15,5 +15,22 @@ class BaseController extends Controller
         return $this->get('fos_user.user_manager');
     }
 
+    /**
+     * @return \Doctrine\Common\Persistence\ObjectManager
+     */
+    public function getEntityManager()
+    {
+        return $this->getDoctrine()->getManager();
+    }
+
+    /**
+     * @return bool
+     */
+    public function flush()
+    {
+        $this->getEntityManager()->flush();
+
+        return true;
+    }
 
 }

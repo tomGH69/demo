@@ -4,6 +4,7 @@
     <script src="{{ asset('bundles/back/js/episode.js') }}"></script>
 {% endblock %}
 {% block body %}
+    {{ parent() }}
     <h1 class="h1">{% if type is constant('BackBundle\\Utils\\Util::FORM_EDIT') %}Edit {{ tvShow.title }}{% else %}Add Tv Show{% endif %}</h1>
 
     {{ form_start(form) }}

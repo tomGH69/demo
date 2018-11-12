@@ -12,10 +12,25 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * TvShow
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="BackBundle\Repository\Media\TvShowRepository")
  */
 class TvShow extends Media
 {
+
+    /**
+     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Actor", inversedBy="tvShows")
+     * @ORM\JoinTable(name="tvshows_actors")
+     * @Assert\NotBlank(groups={"create"})
+     */
+    private $actors;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Director", inversedBy="tvShows")
+     * @ORM\JoinTable(name="tvshows_directors")
+     * @Assert\NotBlank(groups={"create"})
+     */
+    private $directors;
+
 
     /**
      * @ORM\OneToMany(targetEntity="BackBundle\Entity\Media\Episode", mappedBy="tvShow", cascade={"persist"})
@@ -27,8 +42,9 @@ class TvShow extends Media
      */
     public function __construct()
     {
-        parent::__construct();
         $this->episodes = new ArrayCollection();
+        $this->actors = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->directors = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
