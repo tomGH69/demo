@@ -5,8 +5,12 @@ namespace BackBundle\Controller\Media;
 use BackBundle\Controller\BaseController;
 use BackBundle\Entity\Media;
 use BackBundle\Entity\Media\Movie;
+use BackBundle\Event\MediaEvent;
+use BackBundle\Event\MediaPostPersistEvent;
+use BackBundle\Event\MediaPrePersistEvent;
 use BackBundle\Form\Media\MovieType;
 use BackBundle\Form\Media\SearcherType;
+use BackBundle\Security\MovieVoter;
 use BackBundle\Utils\Filter;
 use BackBundle\Utils\Mailer;
 use BackBundle\Utils\Util;
@@ -64,6 +68,8 @@ class MovieController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $movieEvent = new MediaEvent($movie);
+            $movie = $this->get('event_dispatcher')->dispatch('media.prePersist', $movieEvent);
             $em->persist($movie);
             $em->flush();
 
@@ -86,11 +92,14 @@ class MovieController extends BaseController
      */
     public function editAction(Request $request, Movie $movie)
     {
+        $this->denyAccessUnlessGranted(MovieVoter::EDIT, $movie);
+
         $editForm = $this->createForm(MovieType::class, $movie);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->flush();
+            $this->getEntityManager()->persist($movie);
+            $this->getEntityManager()->flush();
             $this->addFlash(
                 'success',
                 'Movie edited'

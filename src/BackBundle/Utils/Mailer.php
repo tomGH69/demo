@@ -16,12 +16,13 @@ class Mailer
 
     private $logger;
 
+
     /**
      * Mailer constructor.
      * @param $mailer
      * @param $logger
      */
-    public function __construct($mailer, LoggerInterface $logger)
+    public function __construct(LoggerInterface $logger, \Swift_Mailer $mailer)
     {
         $this->mailer = $mailer;
         $this->logger = $logger;
@@ -39,7 +40,6 @@ class Mailer
         } else {
             $this->logger->critical("Mail sent error");
         }
-
 
     }
 

@@ -2,14 +2,23 @@ services:
 #    back.example:
 #        class: BackBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
 
   BackBundle\Utils\Mailer:
     public: true
-    arguments: ["@mailer", "@monolog.logger.mailer"]
-    autowire: true
+    arguments: ["@monolog.logger.mailer"]
 
-  BackBundle\Utils\Filter:
+  BackBundle\Security\MovieVoter:
+    tags:
+      - { name: security.voter }
+
+  BackBundle\EventListener\MediaSubscriber:
     public: true
-    autowire: true
+    tags:
+      - { name: doctrine.event_subscriber }
+
 
 

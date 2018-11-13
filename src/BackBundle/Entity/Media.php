@@ -4,23 +4,27 @@ namespace BackBundle\Entity;
 
 use BackBundle\Traits\DoctrineIdTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Media
  *
  * @ORM\Table(name="media")
- * @ORM\Entity(repositoryClass="BackBundle\Repository\MediaRepository")
+ * @ORM\Entity()
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"movie" = "BackBundle\Entity\Media\Movie", "tvshow" = "BackBundle\Entity\Media\TvShow"})
+ * @ORM\HasLifecycleCallbacks()
  */
 abstract class Media
 {
 
     use DoctrineIdTrait;
     use TimestampableEntity;
+    use BlameableEntity;
 
     /**
      * @var
@@ -50,6 +54,13 @@ abstract class Media
      * @Assert\NotBlank(groups={"create"})
      */
     protected $image;
+
+    /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\User")
+     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
+     */
+    protected $owner;
 
 
     /**
@@ -220,4 +231,24 @@ abstract class Media
     {
         return $this->directors;
     }
+
+    /**
+     * @return User
+     */
+    public function getOwner(): User
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @param User $owner
+     * @return Media
+     */
+    public function setOwner(UserInterface $owner): Media
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
 }

@@ -3,8 +3,10 @@
 namespace BackBundle\Entity\Media;
 
 use BackBundle\Entity\Media;
+use BackBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Blameable\Traits\BlameableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -37,6 +39,7 @@ class Movie extends Media
      */
     private $length;
 
+
     /**
      * Constructor
      */
@@ -45,7 +48,7 @@ class Movie extends Media
         $this->actors = new \Doctrine\Common\Collections\ArrayCollection();
         $this->directors = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
 
     /**
      * Set title
@@ -233,6 +236,7 @@ class Movie extends Media
     {
         return $this->image;
     }
+
 
 
 }

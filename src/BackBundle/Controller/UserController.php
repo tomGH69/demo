@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Actor controller.
  *
- * @Route("user")
+ * @Route("super/user")
  */
 class UserController extends BaseController
 {
