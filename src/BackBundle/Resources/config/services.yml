@@ -15,10 +15,4 @@ services:
     tags:
       - { name: security.voter }
 
-  BackBundle\EventListener\MediaSubscriber:
-    public: true
-    tags:
-      - { name: doctrine.event_subscriber }
-
-
 

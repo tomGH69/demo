@@ -3,7 +3,9 @@
 namespace BackBundle\Form\Media;
 
 use BackBundle\Form\ImageType;
+use BackBundle\Form\Person\ActorType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Tetranz\Select2EntityBundle\Form\Type\Select2EntityType;
@@ -20,19 +22,12 @@ class MovieType extends AbstractType
             ->add('description')
             ->add('year')
             ->add('image', ImageType::class)
-            ->add('actors', Select2EntityType::class, [
-                'multiple' => true,
-                'remote_route' => 'person_actor_autocomplete',
-                'class' => 'BackBundle\Entity\Person\Actor',
-                'primary_key' => 'id',
-                'minimum_input_length' => 2,
-                'page_limit' => 10,
-                'allow_clear' => true,
-                'delay' => 250,
-                'cache' => false,
-                'language' => 'en',
-                'placeholder' => 'Select an actor'])
-            ->add('directors',Select2EntityType::class, [
+            ->add('actors', CollectionType::class, [
+                'entry_type' => ActorType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false])
+            ->add('directors', Select2EntityType::class, [
                 'multiple' => true,
                 'remote_route' => 'person_director_autocomplete',
                 'class' => 'BackBundle\Entity\Person\Director',

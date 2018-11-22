@@ -4,8 +4,10 @@ namespace BackBundle\Controller\Person;
 
 
 use BackBundle\Controller\BaseController;
+use BackBundle\Entity\Media\Movie;
 use BackBundle\Entity\Person;
 use BackBundle\Entity\Person\Actor;
+use BackBundle\Form\Person\ActorType;
 use BackBundle\Model\TetranzSelectModel;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;

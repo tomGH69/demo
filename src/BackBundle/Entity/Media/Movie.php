@@ -19,7 +19,7 @@ class Movie extends Media
 {
 
     /**
-     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Actor", inversedBy="movies")
+     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Person\Actor", inversedBy="movies", cascade={"persist"})
      * @ORM\JoinTable(name="movies_actors")
      * @Assert\NotBlank(groups={"create"})
      */

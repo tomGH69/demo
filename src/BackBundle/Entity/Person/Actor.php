@@ -68,7 +68,7 @@ class Actor extends Person
      *
      * @return string
      */
-    public function getFirstname(): string
+    public function getFirstname(): ?string
     {
         return $this->firstname;
     }
