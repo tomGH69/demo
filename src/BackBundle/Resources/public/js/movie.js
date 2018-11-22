@@ -20,14 +20,10 @@ $(document).ready(function () {
         addTagForm($collectionHolder, $newLinkLi);
     });
 
-    $('.submit-add-actor').on('click', function (e) {
-        var body = $(this).parent().parent().parent().find('.modal-body').clone().html();
-
+    $('.submit-add-actor').on('submit', function (e) {
+        var body = $(this).parent().parent().parent().find('.modal-body').html();
         var index = $collectionHolder.find('tr').length + 1;
-        var label = "TEST";
-        $(body).find('input').each(function() {
-            console.log($(this).attr('class'));
-        })
+        var label = $(body).find('input').html();
         $('#container').append(createModal(body, index));
         $collectionHolder.append(createRowTable(index, label));
         $('.modal-creation-actor').modal('hide');
