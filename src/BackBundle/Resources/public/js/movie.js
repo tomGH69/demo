@@ -3,8 +3,29 @@ var $collectionHolder;
 // setup an "add a tag" link
 var $addTagButton = $('.add-tag-button');
 var $newLinkLi = $('<li></li>').append($addTagButton);
-
+var $form = $('#backbundle_media_movie');
 $(document).ready(function () {
+    var actors = [];
+    $('.tr').each(function () {
+        if (actors.indexOf($(this).data('actorId')) === -1) {
+            actors.push($(this).data('actorId'));
+        }
+    });
+    $('#backbundle_media_movie_actor').on('change', function () {
+        $('.tr').each(function () {
+            if (actors.indexOf($(this).data('actorId')) === -1) {
+                actors.push($(this).data('actorId'));
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: $form.data('action'),
+            data: {id: $(this).val(), actors: actors},
+            success: function (html) {
+                $('#container-actors').html($(html).find('#container-actors'));
+            },
+        });
+    });
     // Get the ul that holds the collection of tags
     $collectionHolder = $('table.actors tbody');
 

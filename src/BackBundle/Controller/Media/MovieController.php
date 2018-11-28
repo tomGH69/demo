@@ -5,6 +5,7 @@ namespace BackBundle\Controller\Media;
 use BackBundle\Controller\BaseController;
 use BackBundle\Entity\Media;
 use BackBundle\Entity\Media\Movie;
+use BackBundle\Entity\Person\Actor;
 use BackBundle\Event\MediaEvent;
 use BackBundle\Event\MediaPostPersistEvent;
 use BackBundle\Event\MediaPrePersistEvent;
@@ -16,6 +17,7 @@ use BackBundle\Utils\Mailer;
 use BackBundle\Utils\Util;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -63,6 +65,16 @@ class MovieController extends BaseController
     public function newAction(Request $request)
     {
         $movie = new Movie();
+        if ($request->isXmlHttpRequest()) {
+            $currentActorsIds = $request->request->get('actors');
+            $actors = (!empty($currentActorsIds) ? $currentActorsIds : array());
+            if (!empty($request->request->get('id'))) {
+                $actors[] = $request->request->get('id');
+            }
+            foreach ($actors as $actor => $actorId) {
+                $movie->addActor($this->getEntityManager()->getRepository(Actor::class)->find($actorId));
+            }
+        }
         $form = $this->createForm(MovieType::class, $movie);
         $form->handleRequest($request);
 
@@ -92,8 +104,18 @@ class MovieController extends BaseController
      */
     public function editAction(Request $request, Movie $movie)
     {
-        $this->denyAccessUnlessGranted(MovieVoter::EDIT, $movie);
 
+        $this->denyAccessUnlessGranted(MovieVoter::EDIT, $movie);
+        if ($request->isXmlHttpRequest()) {
+            $currentActorsIds = $request->request->get('actors');
+            $actors = (!empty($currentActorsIds) ? $currentActorsIds : array());
+            if (!empty($request->request->get('id'))) {
+                $actors[] = $request->request->get('id');
+            }
+            foreach ($actors as $actor => $actorId) {
+                $movie->addActor($this->getEntityManager()->getRepository(Actor::class)->find($actorId));
+            }
+        }
         $editForm = $this->createForm(MovieType::class, $movie);
         $editForm->handleRequest($request);
 

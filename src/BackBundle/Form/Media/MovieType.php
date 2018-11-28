@@ -2,8 +2,10 @@
 
 namespace BackBundle\Form\Media;
 
+use BackBundle\Entity\Person\Actor;
 use BackBundle\Form\ImageType;
 use BackBundle\Form\Person\ActorType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,6 +24,8 @@ class MovieType extends AbstractType
             ->add('description')
             ->add('year')
             ->add('image', ImageType::class)
+            ->add('actor', EntityType::class,
+                ['mapped'=>false, 'class'=>Actor::class])
             ->add('actors', CollectionType::class, [
                 'entry_type' => ActorType::class,
                 'allow_add' => true,

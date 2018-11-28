@@ -21,29 +21,35 @@
     {{ form_row(form.image) }}
 
     <div class="row" id="container">
+        {{ form_row(form.actor) }}
         <button type="button" class="btn btn-primary add-tag-button">
             Ajouter un acteur
         </button>
-        <table class="table actors">
-            <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody  data-prototype="{{ form_widget(form.actors.vars.prototype)|e('html_attr') }}">
-            {% for actor in form.actors %}
+        <div class="row" id="container-actors">
+            <table class="table actors">
+                <thead>
                 <tr>
-                <td>
-                    {{ actor.vars.value }}
-                </td>
-                <td>
-                    <button type="button" class="btn btn-secondary modal-edit-actor" data-toggle="modal"
-                            data-target="#exampleModal{{ loop.index }}">
-                        Modifier
-                    </button>
-                </td>
+                    <th>Nom</th>
+                    <th>Action</th>
                 </tr>
+                </thead>
+                <tbody data-prototype="{{ form_widget(form.actors.vars.prototype)|e('html_attr') }}">
+                {% for actor in movie.actors %}
+                    <tr class="tr" data-actor-id="{{ actor.id }}">
+                        <td>
+                            {{ actor }}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary modal-edit-actor" data-toggle="modal"
+                                    data-target="#exampleModal{{ loop.index }}">
+                                Modifier
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% for actor in form.actors %}
                 <div class="modal fade modal-actor" id="exampleModal{{ loop.index }}" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -65,8 +71,7 @@
                     </div>
                 </div>
             {% endfor %}
-            </tbody>
-        </table>
+        </div>
     </div>
     <div class="modal fade modal-creation-actor" id="modal-add-actor" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
